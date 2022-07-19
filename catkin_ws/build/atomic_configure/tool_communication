@@ -1,0 +1,15 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# generated from catkin/cmake/template/script.py.in
+# creates a relay to a python script source file, acting as that file.
+# The purpose is that of a symlink
+python_script = '/mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/catkin_ws/src/Universal_Robots_ROS_Driver/ur_robot_driver/scripts/tool_communication'
+with open(python_script, 'r') as fh:
+    context = {
+        '__builtins__': __builtins__,
+        '__doc__': None,
+        '__file__': python_script,
+        '__name__': __name__,
+        '__package__': None,
+    }
+    exec(compile(fh.read(), python_script, 'exec'), context)
