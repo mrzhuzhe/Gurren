@@ -40,7 +40,11 @@ roslaunch ur_robot_driver example_rviz.launch
 
 > https://ros-planning.github.io/moveit_tutorials/doc/getting_started/getting_started.html
 
+
 ```
+
+# we shall add so many huge package 
+
 warning: adding embedded git repository: ws_moveit/src/geometric_shapes
 hint: You've added another git repository inside your current repository.
 hint: Clones of the outer repository will not contain the contents of
@@ -62,13 +66,14 @@ warning: adding embedded git repository: ws_moveit/src/moveit_visual_tools
 warning: adding embedded git repository: ws_moveit/src/rviz_visual_tools
 warning: adding embedded git repository: ws_moveit/src/srdfdom
 
-git submodule add https://github.com/ros-planning/geometric_shapes.git ws_moveit/src/geometric_shapes
 
+# so clone it as submodules
+git submodule add https://github.com/ros-planning/geometric_shapes.git ws_moveit/src/geometric_shapes
 git submodule add https://github.com/ros-planning/moveit.git ws_moveit/src/moveit
 git submodule add https://github.com/ros-planning/moveit_msgs.git ws_moveit/src/moveit_msgs
 git submodule add https://github.com/ros-planning/moveit_resources.git ws_moveit/src/moveit_resources
 git submodule add https://github.com/ros-planning/moveit_visual_tools.git ws_moveit/src/moveit_visual_tools
-git submodule add https://github.com/ros-planning/rviz_visual_tools.git ws_moveit/src/rviz_visual_tools
+git submodule add https://github.com/PickNikRobotics/rviz_visual_tools.git ws_moveit/src/rviz_visual_tools
 git submodule add https://github.com/ros-planning/srdfdom.git ws_moveit/src/srdfdom
 
 ```

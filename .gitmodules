@@ -12,3 +12,24 @@
 	path = ws_moveit/src/panda_moveit_config
 	url = https://github.com/ros-planning/panda_moveit_config.git
 	branch = melodic-devel
+[submodule "ws_moveit/src/geometric_shapes"]
+	path = ws_moveit/src/geometric_shapes
+	url = https://github.com/ros-planning/geometric_shapes.git
+[submodule "ws_moveit/src/moveit"]
+	path = ws_moveit/src/moveit
+	url = https://github.com/ros-planning/moveit.git
+[submodule "ws_moveit/src/moveit_msgs"]
+	path = ws_moveit/src/moveit_msgs
+	url = https://github.com/ros-planning/moveit_msgs.git
+[submodule "ws_moveit/src/moveit_resources"]
+	path = ws_moveit/src/moveit_resources
+	url = https://github.com/ros-planning/moveit_resources.git
+[submodule "ws_moveit/src/moveit_visual_tools"]
+	path = ws_moveit/src/moveit_visual_tools
+	url = https://github.com/ros-planning/moveit_visual_tools.git
+[submodule "ws_moveit/src/srdfdom"]
+	path = ws_moveit/src/srdfdom
+	url = https://github.com/ros-planning/srdfdom.git
+[submodule "ws_moveit/src/rviz_visual_tools"]
+	path = ws_moveit/src/rviz_visual_tools
+	url = https://github.com/PickNikRobotics/rviz_visual_tools.git
