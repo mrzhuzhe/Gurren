@@ -5,3 +5,10 @@
 [submodule "catkin_ws/src/Universal_Robots_ROS_Driver"]
 	path = catkin_ws/src/Universal_Robots_ROS_Driver
 	url = https://github.com/UniversalRobots/Universal_Robots_ROS_Driver.git
+[submodule "ws_moveit/src/moveit_tutorials"]
+	path = ws_moveit/src/moveit_tutorials
+	url = https://github.com/ros-planning/moveit_tutorials.git
+[submodule "ws_moveit/src/panda_moveit_config"]
+	path = ws_moveit/src/panda_moveit_config
+	url = https://github.com/ros-planning/panda_moveit_config.git
+	branch = melodic-devel
