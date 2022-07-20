@@ -67,7 +67,7 @@ warning: adding embedded git repository: ws_moveit/src/rviz_visual_tools
 warning: adding embedded git repository: ws_moveit/src/srdfdom
 
 
-# so clone it as submodules
+# so clone it as submodules instead
 git submodule add https://github.com/ros-planning/geometric_shapes.git ws_moveit/src/geometric_shapes
 git submodule add https://github.com/ros-planning/moveit.git ws_moveit/src/moveit
 git submodule add https://github.com/ros-planning/moveit_msgs.git ws_moveit/src/moveit_msgs
@@ -77,3 +77,13 @@ git submodule add https://github.com/PickNikRobotics/rviz_visual_tools.git ws_mo
 git submodule add https://github.com/ros-planning/srdfdom.git ws_moveit/src/srdfdom
 
 ```
+
+
+```
+source ws_moveit/devel/setup.bash
+
+#   echo 'source /mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/ws_moveit/devel/setup.bash' >> ~/.bashrc
+```
+
+
+1. planning https://ros-planning.github.io/moveit_tutorials/doc/move_group_python_interface/move_group_python_interface_tutorial.html

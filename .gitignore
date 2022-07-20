@@ -32,4 +32,7 @@
 *.app
 
 
-#ws_moveit
+ws_moveit/.catkin_tools
+ws_moveit/build
+ws_moveit/devel
+ws_moveit/logs
