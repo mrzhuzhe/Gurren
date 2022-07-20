@@ -41,6 +41,8 @@ roslaunch ur_robot_driver example_rviz.launch
 > https://ros-planning.github.io/moveit_tutorials/doc/getting_started/getting_started.html
 
 
+Install 
+
 ```
 
 # we shall add so many huge package 
@@ -78,6 +80,7 @@ git submodule add https://github.com/ros-planning/srdfdom.git ws_moveit/src/srdf
 
 ```
 
+setup workspace
 
 ```
 source ws_moveit/devel/setup.bash
@@ -87,3 +90,17 @@ source ws_moveit/devel/setup.bash
 
 
 1. planning https://ros-planning.github.io/moveit_tutorials/doc/move_group_python_interface/move_group_python_interface_tutorial.html
+
+2. use orientation
+https://stackoverflow.com/questions/60840019/practical-understanding-of-quaternions-in-ros-moveit
+
+```
+quaternion = quaternion_from_euler(60, 0, 30)
+
+pose_goal.orientation.x = quaternion[0]
+pose_goal.orientation.y = quaternion[1]
+pose_goal.orientation.z = quaternion[2]
+pose_goal.orientation.w = quaternion[3]
+
+move_group.set_pose_target(pose_goal)
+```
