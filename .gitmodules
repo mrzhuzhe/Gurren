@@ -33,3 +33,6 @@
 [submodule "ws_moveit/src/rviz_visual_tools"]
 	path = ws_moveit/src/rviz_visual_tools
 	url = https://github.com/PickNikRobotics/rviz_visual_tools.git
+[submodule "ws_moveit/src/universal_robot"]
+	path = ws_moveit/src/universal_robot
+	url = https://github.com/ros-industrial/universal_robot.git
