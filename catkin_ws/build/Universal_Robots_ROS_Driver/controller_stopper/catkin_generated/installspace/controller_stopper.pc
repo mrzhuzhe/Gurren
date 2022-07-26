@@ -1,8 +1,0 @@
-prefix=/mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/catkin_ws/install
-
-Name: controller_stopper
-Description: Description of controller_stopper
-Version: 2.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: controller_manager_msgs roscpp std_msgs

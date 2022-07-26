@@ -32,7 +32,15 @@
 *.app
 
 
+
 ws_moveit/.catkin_tools
 ws_moveit/build
 ws_moveit/devel
 ws_moveit/logs
+
+
+.catkin_workspace
+catkin_ws/.catkin_tools
+catkin_ws/build
+catkin_ws/devel
+catkin_ws/logs

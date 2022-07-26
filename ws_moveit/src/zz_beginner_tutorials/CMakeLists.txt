@@ -24,6 +24,8 @@ find_package(catkin REQUIRED COMPONENTS
   tf2_geometry_msgs
 )
 
+find_package(Eigen3 REQUIRED)
+
 ## Declare ROS messages and services
 #add_message_files(DIRECTORY msg FILES Num.msg)
 add_service_files(DIRECTORY srv FILES AddTwoInts.srv)
@@ -47,7 +49,7 @@ catkin_package(
 
 ## Build talker and listener
 include_directories(include ${catkin_INCLUDE_DIRS})
-#include_directories(SYSTEM ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIR} ${EIGEN3_INCLUDE_DIRS})
+include_directories(SYSTEM ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIR} ${EIGEN3_INCLUDE_DIRS})
 
 add_executable(talker src/talker.cpp)
 target_link_libraries(talker ${catkin_LIBRARIES})
@@ -62,8 +64,13 @@ add_executable(zz_move_group_interface_tutorial src/zz_move_group_interface_tuto
 target_link_libraries(zz_move_group_interface_tutorial ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 install(TARGETS zz_move_group_interface_tutorial DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
+add_executable(zz_move_group_interface_tutorial_backup src/zz_move_group_interface_tutorial_backup.cpp)
+target_link_libraries(zz_move_group_interface_tutorial_backup ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+install(TARGETS zz_move_group_interface_tutorial_backup DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
 install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
+# server test
 add_executable(add_two_ints_server src/add_two_ints_server.cpp)
 target_link_libraries(add_two_ints_server ${catkin_LIBRARIES})
 add_dependencies(add_two_ints_server zz_beginner_tutorials_gencpp)

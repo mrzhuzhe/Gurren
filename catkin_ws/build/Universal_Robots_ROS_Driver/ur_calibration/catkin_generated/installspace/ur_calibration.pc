@@ -1,8 +1,0 @@
-prefix=/mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/catkin_ws/install
-
-Name: ur_calibration
-Description: Description of ur_calibration
-Version: 2.0.0
-Cflags: -I/usr/lib/x86_64-linux-gnu/cmake/yaml-cpp/../../../../../include -I/opt/ros/noetic/include -I/usr/include
-Libs: -L${prefix}/lib /usr/lib/x86_64-linux-gnu/libyaml-cpp.so.0.6.2 /opt/ros/noetic/lib/x86_64-linux-gnu/liburcl.so
-Requires: roscpp ur_robot_driver
