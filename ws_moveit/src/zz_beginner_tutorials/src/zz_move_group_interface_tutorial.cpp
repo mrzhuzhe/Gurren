@@ -143,7 +143,7 @@ int main(int argc, char** argv)
   target_pose1.orientation.y = q_rot.getY();
   target_pose1.orientation.z = q_rot.getZ();
   target_pose1.orientation.w = q_rot.getW();
-  target_pose1.position.x = 0.35;
+  target_pose1.position.x = 0.45;
   target_pose1.position.y = 0;
   target_pose1.position.z = 0.5;
 
@@ -322,24 +322,22 @@ int main(int argc, char** argv)
   waypoints.push_back(target_pose3);  // up and left
   */
   // zz test
-  int theta = 1;
+  int theta = 0;
   for (theta = 0; theta < 360; ++theta)
     {
-
-    
-    
-    /*
-    double r=0, p=0, y=3.14*2*(theta + 90)/360;  // Rotate the previous pose by 180* about X
+        
+    double r=0, p=3.14*2*(150)/360, y=3.14*2*(-theta + 90)/360;  // Rotate the previous pose by 180* about X
     q_rot.setRPY(r, p, y);
     target_pose3.orientation.x = q_rot.getX();
     target_pose3.orientation.y = q_rot.getY();
     target_pose3.orientation.z = q_rot.getZ();
     target_pose3.orientation.w = q_rot.getW();
-    */
+        
+    target_pose3.position.y = target_pose1.position.y + 0.25 * cos(3.14*2*theta/360);
+    target_pose3.position.x = target_pose1.position.x + 0.25 * sin(3.14*2*theta/360);
 
-    target_pose3.position.y = target_pose1.position.y + 0.3 * cos(3.14*2*theta/360);
-    target_pose3.position.x = target_pose1.position.x + 0.3 * sin(3.14*2*theta/360);
-    waypoints.push_back(target_pose3);  // up and left
+    waypoints.push_back(target_pose3);
+
     }
 
   // zz test
