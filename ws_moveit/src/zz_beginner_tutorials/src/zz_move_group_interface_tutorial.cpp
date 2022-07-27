@@ -134,7 +134,7 @@ int main(int argc, char** argv)
 
   tf2::Quaternion q_rot;
 
-  double r=0, p=3.14/2, y=0;  // Rotate the previous pose by 180* about X
+  double r=0, p=3.14, y=0;  // Rotate the previous pose by 180* about X
   q_rot.setRPY(r, p, y);
 
 
@@ -191,19 +191,19 @@ int main(int argc, char** argv)
 
   std::vector<geometry_msgs::Pose> waypoints;
   //waypoints.push_back(start_pose2);
-  waypoints.push_back(target_pose1);
+  //waypoints.push_back(target_pose1);
 
   //geometry_msgs::Pose target_pose3 = start_pose2;
   geometry_msgs::Pose target_pose3 = target_pose1;
 
   // zz test
 
-  target_pose3.position.z = target_pose1.position.z - 0.1;
-  int theta = -30;
+  //target_pose3.position.z = target_pose1.position.z - 0.1;
+  int theta = -60;
   for (; theta < 210; ++theta)
     {
         
-    double r=0, p=3.14*2*(150)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
+    double r=0, p=3.14*2*(210)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
     q_rot.setRPY(r, p, y);
     target_pose3.orientation.x = q_rot.getX();
     target_pose3.orientation.y = q_rot.getY();
@@ -246,8 +246,6 @@ int main(int argc, char** argv)
 
   move_group_interface.execute(trajectory);
 
-  target_pose1.position.x = target_pose1.position.x - 0.1;
-  target_pose1.position.z = target_pose1.position.z + 0.1;
   move_group_interface.setPoseTarget(target_pose1);
   move_group_interface.move();
 
