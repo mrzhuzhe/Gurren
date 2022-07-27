@@ -13,4 +13,6 @@
 ## Questions
 
 1. what is catkin http://wiki.ros.org/catkin/conceptual_overview
-2. rosrun
+2. ros concept 
+3. use cmake properly
+4. 

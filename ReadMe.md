@@ -6,6 +6,24 @@
  2. ur robot driver
  3. moveit 
 
+
+## run
+
+
+```
+roslaunch ur_robot_driver ur5_bringup.launch robot_ip:=192.168.56.101
+
+roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch
+
+roslaunch zz_test moveit_rviz.launch 
+
+roslaunch zz_test move_group_interface_tutorial.launch 
+
+```
+
+
+------------------
+
 ## setup 
 
 ```
@@ -104,3 +122,5 @@ pose_goal.orientation.w = quaternion[3]
 
 move_group.set_pose_target(pose_goal)
 ```
+
+
