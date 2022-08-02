@@ -52,4 +52,11 @@ add_executable(zz_motion_planning_api_tutorial src/zz_motion_planning_api_tutori
 target_link_libraries(zz_motion_planning_api_tutorial ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 install(TARGETS zz_motion_planning_api_tutorial DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
+
+add_executable(zz_motion_planning_pipeline_tutorial src/zz_motion_planning_pipeline_tutorial.cpp)
+target_link_libraries(zz_motion_planning_pipeline_tutorial ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+install(TARGETS zz_motion_planning_pipeline_tutorial DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+
+
 install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
