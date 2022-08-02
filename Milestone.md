@@ -15,4 +15,5 @@
 1. what is catkin http://wiki.ros.org/catkin/conceptual_overview
 2. ros concept 
 3. use cmake properly
-4. 
+4. what is sigularity
+5. how IK work what IK to use

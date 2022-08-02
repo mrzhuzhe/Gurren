@@ -1,6 +1,6 @@
 # Gurren 
 
-> simulate and control ur5
+> 红莲！ simulate and control ur5
 
  1. ros 
  2. ur robot driver
@@ -17,7 +17,9 @@ roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch
 
 roslaunch zz_test moveit_rviz.launch 
 
-roslaunch zz_test move_group_interface_tutorial.launch 
+roslaunch zz_test zz_motion_planning_api_tutorial.launch 
+
+[Deprecated] roslaunch zz_test move_group_interface_tutorial.launch 
 
 ```
 

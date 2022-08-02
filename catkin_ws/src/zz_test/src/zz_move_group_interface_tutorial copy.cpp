@@ -134,7 +134,7 @@ int main(int argc, char** argv)
 
   tf2::Quaternion q_rot;
 
-  double r=0, p=3.14/2, y=0;  // Rotate the previous pose by 180* about X
+  double r=0, p=3.14, y=0;  // Rotate the previous pose by 180* about X
   q_rot.setRPY(r, p, y);
 
 
@@ -143,9 +143,9 @@ int main(int argc, char** argv)
   target_pose1.orientation.y = q_rot.getY();
   target_pose1.orientation.z = q_rot.getZ();
   target_pose1.orientation.w = q_rot.getW();
-  target_pose1.position.x = 0.5;
-  target_pose1.position.y = 0;
-  target_pose1.position.z = 0.4;
+  target_pose1.position.x = 0;
+  target_pose1.position.y = 0.4;
+  target_pose1.position.z = 0.3;
 
   move_group_interface.setPoseTarget(target_pose1);
 
@@ -199,11 +199,11 @@ int main(int argc, char** argv)
   // zz test
 
   //target_pose3.position.z = target_pose1.position.z - 0.1;
-  int theta = -60;
-  for (; theta < 210; ++theta)
+  int theta = -120;
+  for (; theta < 90; ++theta)
     {
         
-    double r=0, p=3.14*2*(150)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
+    double r=0, p=3.14*2*(210)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
     q_rot.setRPY(r, p, y);
     target_pose3.orientation.x = q_rot.getX();
     target_pose3.orientation.y = q_rot.getY();

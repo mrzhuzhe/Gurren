@@ -48,8 +48,8 @@ add_executable(zz_move_group_interface_tutorial src/zz_move_group_interface_tuto
 target_link_libraries(zz_move_group_interface_tutorial ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 install(TARGETS zz_move_group_interface_tutorial DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
-add_executable(zz_move_group_interface_tutorial_backup src/zz_move_group_interface_tutorial_backup.cpp)
-target_link_libraries(zz_move_group_interface_tutorial_backup ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-install(TARGETS zz_move_group_interface_tutorial_backup DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+add_executable(zz_motion_planning_api_tutorial src/zz_motion_planning_api_tutorial.cpp)
+target_link_libraries(zz_motion_planning_api_tutorial ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+install(TARGETS zz_motion_planning_api_tutorial DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})

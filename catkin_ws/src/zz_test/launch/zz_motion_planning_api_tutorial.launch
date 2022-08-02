@@ -1,0 +1,9 @@
+<launch>
+
+  <node name="zz_motion_planning_api_tutorial" pkg="zz_test" type="zz_motion_planning_api_tutorial" respawn="false" output="screen">
+    <rosparam command="load" file="$(find zz_test)/config/kinematics.yaml"/>
+    <param name="/planning_plugin" value="ompl_interface/OMPLPlanner"/>
+    <rosparam command="load" file="$(find zz_test)/config/ompl_planning.yaml"/>
+  </node>
+
+</launch>
