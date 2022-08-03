@@ -161,6 +161,29 @@ int main(int argc, char** argv)
   ROS_INFO_NAMED("tutorial", "Add an object into the world");
   planning_scene_interface.addCollisionObjects(collision_objects);
 
+
+  moveit_msgs::CollisionObject object_to_attach;
+  object_to_attach.id = "cylinder1";
+
+  shape_msgs::SolidPrimitive cylinder_primitive;
+  cylinder_primitive.type = primitive.CYLINDER;
+  cylinder_primitive.dimensions.resize(2);
+  cylinder_primitive.dimensions[primitive.CYLINDER_HEIGHT] = 0.20;
+  cylinder_primitive.dimensions[primitive.CYLINDER_RADIUS] = 0.04;
+
+  // We define the frame/pose for this cylinder so that it appears in the gripper
+  object_to_attach.header.frame_id = move_group_interface.getEndEffectorLink();
+  geometry_msgs::Pose grab_pose;
+  grab_pose.orientation.w = 1.0;
+  grab_pose.position.z = 0.101;  // 0.001 for seperate
+
+  // First, we add the object to the world (without using a vector)
+  object_to_attach.primitives.push_back(cylinder_primitive);
+  object_to_attach.primitive_poses.push_back(grab_pose);
+  object_to_attach.operation = object_to_attach.ADD;
+  planning_scene_interface.applyCollisionObject(object_to_attach);
+
+  move_group_interface.attachObject(object_to_attach.id, "tool0");
   // .. _move_group_interface-planning-to-pose-goal:
   //
   // Planning to a Pose goal
@@ -236,7 +259,7 @@ int main(int argc, char** argv)
   // zz test
 
   //target_pose3.position.z = target_pose1.position.z - 0.1;
-  int theta = -120;
+  int theta = -90;
   for (; theta < 90; ++theta)
     {
         
