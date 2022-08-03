@@ -125,7 +125,7 @@ int main(int argc, char** argv)
 
   // Start the demo
   // ^^^^^^^^^^^^^^^^^^^^^^^^^
-  visual_tools.prompt("Press 456456 'next' in the RvizVisualToolsGui window to start the demo");
+  //visual_tools.prompt("Press 456456 'next' in the RvizVisualToolsGui window to start the demo");
 
 
   moveit_msgs::CollisionObject collision_object;
@@ -147,7 +147,7 @@ int main(int argc, char** argv)
   box_pose.orientation.w = 1.0;
   box_pose.position.x = 0.0;
   box_pose.position.y = 0.0;
-  box_pose.position.z = -0.04;
+  box_pose.position.z = -0.02;
 
   collision_object.primitives.push_back(primitive);
   collision_object.primitive_poses.push_back(box_pose);
@@ -193,20 +193,24 @@ int main(int argc, char** argv)
 
 
   tf2::Quaternion q_rot;
-
-  double r=0, p=3.14, y=0;  // Rotate the previous pose by 180* about X
+  //double r=0, p=3.14, y=0;  // Rotate the previous pose by 180* about X
+  double r=0, p=-M_PI, y=0;  // Rotate the previous pose by 180* about X
   q_rot.setRPY(r, p, y);
 
 
   geometry_msgs::Pose target_pose1;
+  
   target_pose1.orientation.x = q_rot.getX();
   target_pose1.orientation.y = q_rot.getY();
   target_pose1.orientation.z = q_rot.getZ();
   target_pose1.orientation.w = q_rot.getW();
+  
+  //target_pose1.orientation.w = 1;
   target_pose1.position.x = 0;
   target_pose1.position.y = 0.4;
   target_pose1.position.z = 0.3;
-
+  
+  /*
   move_group_interface.setPoseTarget(target_pose1);
 
   //  ROS_INFO_NAMED("tutorial", "x: " << q_rot.getX() << " y: " << q_rot.getY() << " z: " << q_rot.getZ() << " w: " << q_rot.getW());
@@ -221,6 +225,7 @@ int main(int argc, char** argv)
   bool success = (move_group_interface.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
   
   ROS_INFO_NAMED("tutorial", "Visualizing plan 1 (pose goal) %s", success ? "" : "FAILED");
+  
 
   // Visualizing plans
   // ^^^^^^^^^^^^^^^^^
@@ -231,7 +236,7 @@ int main(int argc, char** argv)
   visual_tools.publishTrajectoryLine(my_plan.trajectory_, joint_model_group);
   visual_tools.trigger();
   visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
-
+  */
   // Finally, to execute the trajectory stored in my_plan, you could use the following method call:
   // Note that this can lead to problems if the robot moved in the meanwhile.
   // move_group_interface.execute(my_plan);
@@ -244,7 +249,7 @@ int main(int argc, char** argv)
   // and should be preferred. Note that the pose goal we had set earlier is still active,
   // so the robot will try to move to that goal.
 
-  move_group_interface.move();
+  //move_group_interface.move();
 
   //  ROS_INFO_NAMED("tutorial", "x: " << q_rot.getX() << " y: " << q_rot.getY() << " z: " << q_rot.getZ() << " w: " << q_rot.getW());
   ROS_INFO_NAMED("tutorial", "x: %f y: %f z: %f w: %f", q_rot.getX(), q_rot.getY(), q_rot.getZ(), q_rot.getW());
@@ -258,7 +263,8 @@ int main(int argc, char** argv)
 
   // zz test
 
-  //target_pose3.position.z = target_pose1.position.z - 0.1;
+  waypoints.push_back(target_pose1);
+
   int theta = -90;
   for (; theta < 90; ++theta)
     {
@@ -277,8 +283,9 @@ int main(int argc, char** argv)
 
     }
 
+  target_pose1.position.z = 0.4;
   // zz test
-  //waypoints.push_back(target_pose1);
+  waypoints.push_back(target_pose1);
 
   // We want the Cartesian path to be interpolated at a resolution of 1 cm
   // which is why we will specify 0.01 as the max step in Cartesian
@@ -306,8 +313,9 @@ int main(int argc, char** argv)
 
   move_group_interface.execute(trajectory);
 
-  move_group_interface.setPoseTarget(target_pose1);
-  move_group_interface.move();
+  //target_pose1.position.z = 0.4;
+  //move_group_interface.setPoseTarget(target_pose1);
+  //move_group_interface.move();
 
 
   ros::shutdown();
