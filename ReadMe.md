@@ -11,15 +11,22 @@
 
 
 ```
+// connect robot
 roslaunch ur_robot_driver ur5_bringup.launch robot_ip:=192.168.56.101
 
+// make planing
 roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch
 
+// visualize
 roslaunch zz_test moveit_rviz.launch 
 
-roslaunch zz_test zz_motion_planning_api_tutorial.launch 
+// application
 
-[Deprecated] roslaunch zz_test move_group_interface_tutorial.launch 
+// draw a circle/cone
+roslaunch zz_test move_group_interface_tutorial.launch 
+
+// [WIP] test plan api
+roslaunch zz_test zz_motion_planning_api_tutorial.launch
 
 ```
 

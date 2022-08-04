@@ -208,7 +208,7 @@ int main(int argc, char** argv)
   //target_pose1.orientation.w = 1;
   target_pose1.position.x = 0;
   target_pose1.position.y = 0.4;
-  target_pose1.position.z = 0.3;
+  target_pose1.position.z = 0.4;
   
   /*
   move_group_interface.setPoseTarget(target_pose1);
@@ -262,9 +262,10 @@ int main(int argc, char** argv)
   geometry_msgs::Pose target_pose3 = target_pose1;
 
   // zz test
-
+  // [BUG] initial point shall not been added to waypoints https://answers.ros.org/question/253004/moveit-problem-error-trajectory-message-contains-waypoints-that-are-not-strictly-increasing-in-time/
   waypoints.push_back(target_pose1);
 
+  /*
   int theta = -90;
   for (; theta < 90; ++theta)
     {
@@ -282,9 +283,30 @@ int main(int argc, char** argv)
     waypoints.push_back(target_pose3);
 
     }
+  */
 
-  target_pose1.position.z = 0.4;
-  // zz test
+  
+  int theta = 100; // only 350 degree
+  for (; theta < 450; ++theta)
+    {
+        
+    double r=0, p=3.14*2*(210)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
+    q_rot.setRPY(r, p, y);
+    target_pose3.orientation.x = q_rot.getX();
+    target_pose3.orientation.y = q_rot.getY();
+    target_pose3.orientation.z = q_rot.getZ();
+    target_pose3.orientation.w = q_rot.getW();
+    
+    target_pose3.position.y = target_pose1.position.y + 0.20 * cos(3.14*2*theta/360);
+    target_pose3.position.x = target_pose1.position.x + 0.20 * sin(3.14*2*theta/360);
+    // avoid joint limit
+    target_pose3.position.z = target_pose1.position.z - 0.1;
+    waypoints.push_back(target_pose3);
+
+    }
+  // [ERROR] [1659608954.356257928]: Trajectory message contains waypoints that are not strictly increasing in time
+  // return to a different point
+  target_pose1.position.z += 0.2;
   waypoints.push_back(target_pose1);
 
   // We want the Cartesian path to be interpolated at a resolution of 1 cm
