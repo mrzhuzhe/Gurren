@@ -15,7 +15,7 @@
 1. what is catkin http://wiki.ros.org/catkin/conceptual_overview (ok) 
 2. ros concept (ok)
 3. use cmake properly (ok) 
-4. what is sigularity
+4. what is sigularity (ok) https://www.mecademic.com/en/what-are-singularities-in-a-six-axis-robot-arm#:~:text=A%20robot%20singularity%20is%20a,or%20serial%20manipulator)%20has%20singularities.
 5. how IK work what IK to use
 
 

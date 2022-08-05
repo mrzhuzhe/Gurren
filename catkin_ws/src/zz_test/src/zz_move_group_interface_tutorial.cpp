@@ -125,7 +125,33 @@ int main(int argc, char** argv)
 
   // Start the demo
   // ^^^^^^^^^^^^^^^^^^^^^^^^^
-  //visual_tools.prompt("Press 456456 'next' in the RvizVisualToolsGui window to start the demo");
+  visual_tools.prompt("Press 456456 'next' in the RvizVisualToolsGui window to start the demo");
+
+
+  // get robot state start 
+  const std::vector<std::string>& joint_names = joint_model_group->getVariableNames();
+
+  moveit::core::RobotStatePtr kinematic_state(new moveit::core::RobotState(*move_group_interface.getCurrentState()));
+
+  std::vector<double> joint_values;
+
+  kinematic_state->copyJointGroupPositions(joint_model_group, joint_values);
+
+  for (std::size_t i = 0; i < joint_names.size(); ++i)
+  {
+    ROS_INFO("Joint %s: %f", joint_names[i].c_str(), joint_values[i]);
+  }
+
+  const Eigen::Isometry3d& end_effector_state = kinematic_state->getGlobalLinkTransform("tool0");
+
+  /* Print end-effector pose. Remember that this is in the model frame */
+  ROS_INFO_STREAM("Translation: \n" << end_effector_state.translation() << "\n");
+  ROS_INFO_STREAM("Rotation: \n" << end_effector_state.rotation() << "\n");
+  // get robot state end
+
+
+
+
 
 
   moveit_msgs::CollisionObject collision_object;
