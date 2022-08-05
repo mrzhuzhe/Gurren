@@ -207,7 +207,7 @@ int main(int argc, char** argv)
   
   //target_pose1.orientation.w = 1;
   target_pose1.position.x = 0;
-  target_pose1.position.y = 0.4;
+  target_pose1.position.y = 0.5;
   target_pose1.position.z = 0.4;
   
   /*
@@ -290,7 +290,7 @@ int main(int argc, char** argv)
   for (; theta < 450; ++theta)
     {
         
-    double r=0, p=3.14*2*(210)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
+    double r=0, p=3.14*2*(180 + 60)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
     q_rot.setRPY(r, p, y);
     target_pose3.orientation.x = q_rot.getX();
     target_pose3.orientation.y = q_rot.getY();
