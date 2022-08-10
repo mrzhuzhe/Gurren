@@ -233,7 +233,7 @@ int main(int argc, char** argv)
   
   //target_pose1.orientation.w = 1;
   target_pose1.position.x = 0;
-  target_pose1.position.y = 0.5;
+  target_pose1.position.y = 0.6;
   target_pose1.position.z = 0.4;
   
   /*
