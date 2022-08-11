@@ -144,6 +144,13 @@ physics setting:
 https://classic.gazebosim.org/tutorials?cat=physics
 there are some setting wrong in inertial friction and so on
 
+## ROS sensor 
+
+1. http://wiki.ros.org/Sensors drivers and so on
+2. http://wiki.ros.org/Sensors/Cameras 
+3. https://classic.gazebosim.org/tutorials?tut=ros_gzplugins&cat=connect_ros 
+4. /rrbot/camera1/image_raw
+5. gazebo cannot be definte in world only used in URDF
 
 ## references
 
