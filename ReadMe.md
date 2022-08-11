@@ -137,7 +137,12 @@ move_group.set_pose_target(pose_goal)
 
 ## gazebo
 
+docs:
 https://classic.gazebosim.org/tutorials?tut=components&cat=get_started
+
+physics setting: 
+https://classic.gazebosim.org/tutorials?cat=physics
+there are some setting wrong in inertial friction and so on
 
 
 ## references
