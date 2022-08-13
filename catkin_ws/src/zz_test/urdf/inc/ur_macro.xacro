@@ -339,7 +339,7 @@
     <joint name="camera_joint" type="fixed">
       <axis xyz="0 1 0" />
       <origin xyz="-0.02 0.0 0.055" rpy="0 0 0"/>
-      <parent link="${prefix}wrist_3_link"/>
+      <parent link="wrist_3_link"/>
       <child link="camera_link"/>
     </joint>
     <xacro:property name="camera_link" value="0.05" /> <!-- Size of square 'camera' box -->
@@ -348,13 +348,13 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-    <box size="${camera_link} ${camera_link} ${camera_link}"/>
-        </geometry>
-      </collision>
-      <visual>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <geometry>
-    <box size="${camera_link} ${camera_link} ${camera_link}"/>
+          <box size="${camera_link} ${camera_link} ${camera_link}"/>
+              </geometry>
+            </collision>
+            <visual>
+              <origin xyz="0 0 0" rpy="0 0 0"/>
+              <geometry>
+          <box size="${camera_link} ${camera_link} ${camera_link}"/>
         </geometry>
         <material name="green"/>
       </visual>
@@ -365,56 +365,9 @@
         <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
       </inertial>
     </link>
-    
-  
-    <gazebo reference="camera_link">
-      <mu1>0.2</mu1>
-      <mu2>0.2</mu2>
-      <material>Gazebo/Green</material>
-    </gazebo>
-
-    <gazebo reference="camera_link">
-      <sensor type="camera" name="camera1">
-        <update_rate>30.0</update_rate>
-        <camera name="head">
-          <horizontal_fov>1.3962634</horizontal_fov>
-          <image>
-            <width>800</width>
-            <height>800</height>
-            <format>R8G8B8</format>
-          </image>
-          <clip>
-            <near>0.02</near>
-            <far>300</far>
-          </clip>
-          <noise>
-            <type>gaussian</type>
-            <!-- Noise is sampled independently per pixel on each frame.
-                That pixel's noise value is added to each of its color
-                channels, which at that point lie in the range [0,1]. -->
-            <mean>0.0</mean>
-            <stddev>0.007</stddev>
-          </noise>
-        </camera>
-        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-          <alwaysOn>true</alwaysOn>
-          <updateRate>0.0</updateRate>
-          <cameraName>rrbot/camera1</cameraName>
-          <imageTopicName>image_raw</imageTopicName>
-          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-          <frameName>wrist_3_link</frameName>
-          <hackBaseline>0.07</hackBaseline>
-          <distortionK1>0.0</distortionK1>
-          <distortionK2>0.0</distortionK2>
-          <distortionK3>0.0</distortionK3>
-          <distortionT1>0.0</distortionT1>
-          <distortionT2>0.0</distortionT2>
-        </plugin>
-        <always_on>1</always_on>
-        <visualize>true</visualize>
-      </sensor>
-    </gazebo>
     <!--- zz end  -->
   
   </xacro:macro>
+
+  <xacro:include filename="$(find zz_test)/urdf/inc/camera.gazebo.xacro" />
 </robot>
