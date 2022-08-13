@@ -35,21 +35,11 @@
       </link>
       
     </model>
-    
-
-    <!-- 
-    <joint name="hokuyo_joint" type="fixed">
-      <child>hokuyo::link</child>
-      <parent>chassis</parent>
-    </joint> 
-    model://camera
-    -->
-
-   
+       
     <model name="camera_model">
       <static>true</static>
       <pose>-1.25 0.5 0.5 0 0 0</pose>
-      <link name="camera_link1">
+      <link name="camera_link">
         <visual name="visual">
           <geometry>
             <box>
@@ -57,22 +47,7 @@
             </box>
           </geometry>
         </visual>
-        <!-- High fps high-res camera to test strict rate
-        <sensor name="camera_sensor" type="camera">
-          <camera>
-            <horizontal_fov>1.0472</horizontal_fov>
-            <image>
-              <width>1280</width>
-              <height>720</height>
-            </image>
-          </camera>
-          <always_on>1</always_on>
-          <!- - We choose a high fps on purpose. The goal is to check the effect
-            of lockstep. - ->
-          <update_rate>500</update_rate>
-          <visualize>true</visualize>
-        </sensor>  -->
-        <!-- Regular camera, to make sure strict rate is only applied to the sensor intended 
+        <!-- Regular camera, to make sure strict rate is only applied to the sensor intended -->
         <sensor name="camera_sensor_regular" type="camera">
           <camera>
             <horizontal_fov>1.0472</horizontal_fov>
@@ -81,53 +56,12 @@
               <height>240</height>
             </image>
           </camera>
-          <always_on>1</always_on>
-          <update_rate>30</update_rate>
-          <visualize>true</visualize>
-        </sensor> -->        
-      </link>
-
-      <!-- <joint name="camera_joint" type="fixed">
-        <child>link</child>
-        <parent>robot::wrist_3_link</parent>
-      </joint>  --> 
-
-      
-
-    </model>
-
-    <!-- 
-      <robot xmlns:xacro="http://ros.org/wiki/xacro">
-      <gazebo reference="wrist_3_link">
-        <sensor type="camera" name="camera1">
-          <update_rate>30.0</update_rate>
-          <camera name="head">
-            <horizontal_fov>1.3962634</horizontal_fov>
-            <image>
-              <width>800</width>
-              <height>800</height>
-              <format>R8G8B8</format>
-            </image>
-            <clip>
-              <near>0.02</near>
-              <far>300</far>
-            </clip>
-            <noise>
-              <type>gaussian</type>
-              <!- - Noise is sampled independently per pixel on each frame.
-                  That pixel's noise value is added to each of its color
-                  channels, which at that point lie in the range [0,1]. - ->
-              <mean>0.0</mean>
-              <stddev>0.007</stddev>
-            </noise>
-          </camera>
           <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-            <alwaysOn>true</alwaysOn>
             <updateRate>0.0</updateRate>
-            <cameraName>rrbot/camera1</cameraName>
+            <cameraName>sidecam</cameraName>
             <imageTopicName>image_raw</imageTopicName>
             <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-            <frameName>wrist_3_link</frameName>
+            <frameName>camera_link</frameName>
             <hackBaseline>0.07</hackBaseline>
             <distortionK1>0.0</distortionK1>
             <distortionK2>0.0</distortionK2>
@@ -136,10 +70,19 @@
             <distortionT2>0.0</distortionT2>
           </plugin>
           <always_on>1</always_on>
+          <update_rate>30</update_rate>
           <visualize>true</visualize>
         </sensor>
-      </gazebo>
-    </robot>  --> 
+      </link>
+
+      <joint name="camera_joint" type="fixed">
+        <child>camera_link</child>
+        <parent>world</parent>
+      </joint> 
+
+      
+
+    </model>
 
   </world>
 </sdf>

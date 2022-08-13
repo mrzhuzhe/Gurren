@@ -46,7 +46,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Camera
       Name: Camera1
-      Image Topic: /rrbot/camera1/image_raw
+      Image Topic: tcpcam/image_raw
     - Class: rviz/MarkerArray
       Enabled: true
       Marker Topic: /rviz_visual_tools
