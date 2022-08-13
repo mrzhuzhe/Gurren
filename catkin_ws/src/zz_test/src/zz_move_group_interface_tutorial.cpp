@@ -123,9 +123,7 @@ int main(int argc, char** argv)
   std::copy(move_group_interface.getJointModelGroupNames().begin(),
             move_group_interface.getJointModelGroupNames().end(), std::ostream_iterator<std::string>(std::cout, ", "));
 
-  // Start the demo
-  // ^^^^^^^^^^^^^^^^^^^^^^^^^
-  visual_tools.prompt("Press 456456 'next' in the RvizVisualToolsGui window to start the demo");
+  
 
 
   // get robot state start 
@@ -149,11 +147,7 @@ int main(int argc, char** argv)
   ROS_INFO_STREAM("Rotation: \n" << end_effector_state.rotation() << "\n");
   // get robot state end
 
-
-
-
-
-
+  // add constraint
   moveit_msgs::CollisionObject collision_object;
   collision_object.header.frame_id = move_group_interface.getPlanningFrame();
 
@@ -217,6 +211,10 @@ int main(int argc, char** argv)
   // We can plan a motion for this group to a desired pose for the
   // end-effector.
 
+
+  // Start the demo
+  // ^^^^^^^^^^^^^^^^^^^^^^^^^
+  visual_tools.prompt("Press 456456 'next' in the RvizVisualToolsGui window to start the demo");
 
   tf2::Quaternion q_rot;
   //double r=0, p=3.14, y=0;  // Rotate the previous pose by 180* about X
@@ -316,7 +314,7 @@ int main(int argc, char** argv)
   for (; theta < 450; ++theta)
     {
         
-    double r=0, p=3.14*2*(180 + 60)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
+    double r=0, p=3.14*2*(180+60)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
     q_rot.setRPY(r, p, y);
     target_pose3.orientation.x = q_rot.getX();
     target_pose3.orientation.y = q_rot.getY();

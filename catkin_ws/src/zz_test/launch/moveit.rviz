@@ -45,6 +45,7 @@ Visualization Manager:
       Reference Frame: <Fixed Frame>
       Value: true
     - Class: rviz/Camera
+      Name: Camera1
       Image Topic: /rrbot/camera1/image_raw
     - Class: rviz/MarkerArray
       Enabled: true

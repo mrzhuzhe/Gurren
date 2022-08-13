@@ -17,7 +17,7 @@ roslaunch ur_robot_driver ur5_bringup.launch robot_ip:=192.168.56.101
 
 // make planing
 roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch
-[with gazebo ]roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch sim:=true
+[with gazebo ]roslaunch zz_test ur5_moveit_planning_execution.launch sim:=true
 
 // visualize
 roslaunch zz_test moveit_rviz.launch 
