@@ -1,38 +1,36 @@
 /*********************************************************************
- * Software License Agreement (BSD License)
- *
- *  Copyright (c) 2013, SRI International
- *  All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without
- *  modification, are permitted provided that the following conditions
- *  are met:
- *
- *   * Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
- *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following
- *     disclaimer in the documentation and/or other materials provided
- *     with the distribution.
- *   * Neither the name of SRI International nor the names of its
- *     contributors may be used to endorse or promote products derived
- *     from this software without specific prior written permission.
- *
- *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
- *  FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
- *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- *  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- *  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- *  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- *  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
- *  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
- *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- *  POSSIBILITY OF SUCH DAMAGE.
+ way points
+ [
+ [141.7283586   23.37476801  -2.5312582 ]
+ [148.32357805  62.06995544 -16.99646102]
+ [156.31206129  82.81996499 -25.11564635]
+ [165.32296036  99.39501807 -31.94494157]
+ [174.5926348  112.70585208 -37.76189701]
+ [184.28402943 124.08254742 -43.09098257]
+ [193.2839186  132.98302989 -47.54528995]
+ [200.71756702 139.39296791 -50.91325777]
+ [206.93604009 144.21216159 -53.53679733]
+ [212.12789027 147.90687012 -55.58909296]
+ [218.25905153 151.91934477 -58.00627907]
+ [226.52083334 156.75794159 -61.28208229]
+ [234.13574469 160.68365643 -64.17301788]
+ [238.09946373 162.54727092 -65.46408384]
+ [241.63190381 164.11916515 -66.55903408]
+ [246.03767845 165.96391188 -68.00171686]
+ [251.20596528 167.96139586 -69.73637004]
+ [257.57248207 170.17436855 -71.92911076]
+ [264.07968499 172.15916675 -74.14589448]
+ [269.78490478 173.67906434 -76.01936324]
+ [274.51303725 174.79185482 -77.49294939]
+ [278.4283619  175.61934829 -78.63953325]
+ [281.95430736 176.29615727 -79.62900044]
+ [288.29429588 177.33831188 -81.7014383 ]
+ [295.98123895 178.28355523 -84.27800438]
+ [302.85647615 178.83618722 -86.53090407]
+ [307.38486318 179.05663333 -87.96322679]
+ [311.95508195 179.15869388 -89.40987434]]
  *********************************************************************/
 
-/* Author: Sachin Chitta, Dave Coleman, Mike Lautman */
 
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
@@ -167,7 +165,7 @@ int main(int argc, char** argv)
   box_pose.orientation.w = 1.0;
   box_pose.position.x = 0.0;
   box_pose.position.y = 0.0;
-  box_pose.position.z = -0.02;
+  box_pose.position.z = -0.03;
 
   collision_object.primitives.push_back(primitive);
   collision_object.primitive_poses.push_back(box_pose);
@@ -188,14 +186,14 @@ int main(int argc, char** argv)
   shape_msgs::SolidPrimitive cylinder_primitive;
   cylinder_primitive.type = primitive.CYLINDER;
   cylinder_primitive.dimensions.resize(2);
-  cylinder_primitive.dimensions[primitive.CYLINDER_HEIGHT] = 0.20;
-  cylinder_primitive.dimensions[primitive.CYLINDER_RADIUS] = 0.04;
+  cylinder_primitive.dimensions[primitive.CYLINDER_HEIGHT] = 0.15;
+  cylinder_primitive.dimensions[primitive.CYLINDER_RADIUS] = 0.02;
 
   // We define the frame/pose for this cylinder so that it appears in the gripper
   object_to_attach.header.frame_id = move_group_interface.getEndEffectorLink();
   geometry_msgs::Pose grab_pose;
   grab_pose.orientation.w = 1.0;
-  grab_pose.position.z = 0.101;  // 0.001 for seperate
+  grab_pose.position.z = 0.076;  // 0.001 for seperate
 
   // First, we add the object to the world (without using a vector)
   object_to_attach.primitives.push_back(cylinder_primitive);
@@ -230,9 +228,11 @@ int main(int argc, char** argv)
   target_pose1.orientation.w = q_rot.getW();
   
   //target_pose1.orientation.w = 1;
+  //241.63190381 164.11916515 -66.55903408
+  double radius = 0.2416, degs = 90-66.6, tableHeight = 0.1, waypoint_z = 0.1641;
   target_pose1.position.x = 0;
   target_pose1.position.y = 0.6;
-  target_pose1.position.z = 0.4;
+  target_pose1.position.z = tableHeight + waypoint_z + 0.1;
   
   /*
   move_group_interface.setPoseTarget(target_pose1);
@@ -314,15 +314,15 @@ int main(int argc, char** argv)
   for (; theta < 450; ++theta)
     {
         
-    double r=0, p=3.14*2*(180+60)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
+    double r=0, p=3.14*2*(180+degs)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
     q_rot.setRPY(r, p, y);
     target_pose3.orientation.x = q_rot.getX();
     target_pose3.orientation.y = q_rot.getY();
     target_pose3.orientation.z = q_rot.getZ();
     target_pose3.orientation.w = q_rot.getW();
     
-    target_pose3.position.y = target_pose1.position.y + 0.20 * cos(3.14*2*theta/360);
-    target_pose3.position.x = target_pose1.position.x + 0.20 * sin(3.14*2*theta/360);
+    target_pose3.position.y = target_pose1.position.y + radius * cos(3.14*2*theta/360);
+    target_pose3.position.x = target_pose1.position.x + radius * sin(3.14*2*theta/360);
     // avoid joint limit
     target_pose3.position.z = target_pose1.position.z - 0.1;
     waypoints.push_back(target_pose3);
