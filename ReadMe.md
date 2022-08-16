@@ -5,10 +5,9 @@
  1. ros 
  2. ur robot driver
  3. moveit 
- 4. gazebp
+ 4. gazebo
 
-## run
-
+## Run
 
 ```
 // connect robot
@@ -31,11 +30,28 @@ roslaunch zz_test move_group_interface_tutorial.launch
 roslaunch zz_test zz_motion_planning_api_tutorial.launch
 
 ```
-
+<br>
 
 ------------------
 
-## setup 
+<br>
+<br>
+
+
+## Applications
+
+Robot applications features will be develop in other reposs
+
+1. calculate way point from CAD https://github.com/mrzhuzhe/Patrick/tree/main/geo/contour
+
+<br>
+
+------------------
+
+<br>
+<br>
+
+## Setup 
 
 ```
 source devel/setup.bash
@@ -43,13 +59,21 @@ source devel/setup.bash
 > https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/blob/master/README.md#extract-calibration-information
 
 
+<br>
+
+------------------
+
+<br>
+<br>
+
 ## simulator setup 
 
 use vitual machine on linux 
 
 > https://www.universal-robots.com/download/software-cb-series/simulator-linux/offline-simulator-cb3-linux-ursim-3157/
 
-## example
+
+
 ```
 # connect to Robot
 
@@ -63,6 +87,14 @@ roslaunch ur_robot_driver example_rviz.launch
 ```
 
 > https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/blob/master/ur_robot_driver/doc/usage_example.md
+
+<br>
+
+------------------
+
+<br>
+<br>
+
 
 
 ## Moveit 
@@ -133,7 +165,12 @@ pose_goal.orientation.w = quaternion[3]
 
 move_group.set_pose_target(pose_goal)
 ```
+<br>
 
+------------------
+
+<br>
+<br>
 
 ## gazebo
 
@@ -144,6 +181,13 @@ physics setting:
 https://classic.gazebosim.org/tutorials?cat=physics
 there are some setting wrong in inertial friction and so on
 
+<br>
+
+------------------
+
+<br>
+<br>
+
 ## ROS sensor 
 
 1. http://wiki.ros.org/Sensors drivers and so on
@@ -152,6 +196,13 @@ there are some setting wrong in inertial friction and so on
 4. /rrbot/camera1/image_raw
 5. gazebo cannot be definte in world only used in URDF
 
+<br>
+
+------------------
+
+<br>
+<br>
+
 ## references
 
 1. https://github.com/fmauch/universal_robot
@@ -159,3 +210,10 @@ there are some setting wrong in inertial friction and so on
 3. https://github.com/lihuang3/ur5_ROS-Gazebo
 4. https://github.com/MingshanHe/Compliant-Control-and-Application
 5.  World Robot Summit 
+
+<br>
+
+------------------
+
+<br>
+<br>
