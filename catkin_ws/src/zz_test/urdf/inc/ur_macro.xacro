@@ -365,6 +365,37 @@
         <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
       </inertial>
     </link>    
+
+    <joint name="ee_joint" type="fixed">
+      <origin xyz="0 0 0" />
+      <parent link="wrist_3_link"/>
+      <child link="ee_link"/>
+    </joint>
+
+    <link name="ee_link">
+      <collision>
+        <origin xyz="0 0 0.075" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="0.14" radius="0.03"/>
+        </geometry>
+      </collision>
+
+      <visual>
+        <origin xyz="0 0 0.075" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="0.14" radius="0.03"/>
+        </geometry>
+      </visual>
+
+      <inertial>
+        <origin xyz="0 0 0.075" rpy="0 0 0"/>
+        <mass value="0.00001"/>
+        <inertia
+          ixx="0.00001" ixy="0.0" ixz="0.0"
+          iyy="0.00001" iyz="0.0"
+          izz="0.00001"/>
+      </inertial>
+    </link>  
     <!--- zz end  -->
   
   </xacro:macro>

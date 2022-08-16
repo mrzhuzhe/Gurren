@@ -179,7 +179,7 @@ int main(int argc, char** argv)
   ROS_INFO_NAMED("tutorial", "Add an object into the world");
   planning_scene_interface.addCollisionObjects(collision_objects);
 
-
+  /*
   moveit_msgs::CollisionObject object_to_attach;
   object_to_attach.id = "cylinder1";
 
@@ -202,12 +202,7 @@ int main(int argc, char** argv)
   planning_scene_interface.applyCollisionObject(object_to_attach);
 
   move_group_interface.attachObject(object_to_attach.id, "tool0");
-  // .. _move_group_interface-planning-to-pose-goal:
-  //
-  // Planning to a Pose goal
-  // ^^^^^^^^^^^^^^^^^^^^^^^
-  // We can plan a motion for this group to a desired pose for the
-  // end-effector.
+  */
 
 
   // Start the demo
@@ -289,32 +284,14 @@ int main(int argc, char** argv)
   // [BUG] initial point shall not been added to waypoints https://answers.ros.org/question/253004/moveit-problem-error-trajectory-message-contains-waypoints-that-are-not-strictly-increasing-in-time/
   waypoints.push_back(target_pose1);
 
-  /*
-  int theta = -90;
-  for (; theta < 90; ++theta)
-    {
-        
-    double r=0, p=3.14*2*(210)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
-    q_rot.setRPY(r, p, y);
-    target_pose3.orientation.x = q_rot.getX();
-    target_pose3.orientation.y = q_rot.getY();
-    target_pose3.orientation.z = q_rot.getZ();
-    target_pose3.orientation.w = q_rot.getW();
-    
-    target_pose3.position.y = target_pose1.position.y + 0.20 * cos(3.14*2*theta/360);
-    target_pose3.position.x = target_pose1.position.x + 0.20 * sin(3.14*2*theta/360);
-
-    waypoints.push_back(target_pose3);
-
-    }
-  */
 
   
   int theta = 100; // only 350 degree
   for (; theta < 450; ++theta)
     {
         
-    double r=0, p=3.14*2*(180+degs)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
+    //double r=0, p=3.14*2*(180+degs)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
+    double r=0, p=M_PI*2*(180+degs)/360, y=M_PI*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
     q_rot.setRPY(r, p, y);
     target_pose3.orientation.x = q_rot.getX();
     target_pose3.orientation.y = q_rot.getY();
@@ -352,8 +329,8 @@ int main(int argc, char** argv)
   ROS_INFO_NAMED("tutorial", "waypoint %ld", waypoints.size());
 
 
-  for (std::size_t i = 0; i < waypoints.size(); ++i)
-    visual_tools.publishAxisLabeled(waypoints[i], "pt" + std::to_string(i), rvt::SMALL);
+  //for (std::size_t i = 0; i < waypoints.size(); ++i)
+  //  visual_tools.publishAxisLabeled(waypoints[i], "pt" + std::to_string(i), rvt::SMALL);
   visual_tools.trigger();
   visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
 
