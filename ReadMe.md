@@ -37,6 +37,35 @@ roslaunch zz_test zz_motion_planning_api_tutorial.launch
 <br>
 <br>
 
+## Install 
+
+
+```
+# install ROS Noetic first
+
+# then pull all submodules
+git pull --recurse-submodules
+
+# install dependencies
+$ sudo apt update -qq
+$ rosdep update
+$ rosdep install --from-paths src --ignore-src -y
+
+# build the workspace
+$ catkin_make
+
+# activate the workspace (ie: source it)
+$ source devel/setup.bash
+
+
+```
+<br>
+
+------------------
+
+<br>
+<br>
+
 
 ## Applications
 

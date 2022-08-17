@@ -9,4 +9,11 @@
   <include file="$(find zz_test)/launch/move_group.launch">
     <arg name="debug" default="$(arg debug)" />
   </include>
+
+  <node pkg="zz_test" type="cv_camera_node" name="cv_camera_node">
+    <param name="camera_info_url" value="file://$(find zz_test)/config/camera_setting.yaml" />
+    <param name="frame_id" value="base_link" />
+    <param name="rate" value="30.0" />
+  </node>
+
 </launch>

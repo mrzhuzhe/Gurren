@@ -224,7 +224,8 @@ int main(int argc, char** argv)
   
   //target_pose1.orientation.w = 1;
   //241.63190381 164.11916515 -66.55903408
-  double radius = 0.2416, degs = 90-66.6, tableHeight = 0.1, waypoint_z = 0.1641;
+  // max 311.95508195 179.15869388 -89.40987434
+  double radius = 0.312, degs = 90-89.4, tableHeight = 0.1, waypoint_z = 0.1791;
   target_pose1.position.x = 0;
   target_pose1.position.y = 0.6;
   target_pose1.position.z = tableHeight + waypoint_z + 0.1;
