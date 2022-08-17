@@ -26,9 +26,6 @@ roslaunch zz_test moveit_rviz.launch
 // draw a circle/cone
 roslaunch zz_test move_group_interface_tutorial.launch 
 
-// [WIP] test plan api
-roslaunch zz_test zz_motion_planning_api_tutorial.launch
-
 ```
 <br>
 
