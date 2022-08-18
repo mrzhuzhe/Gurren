@@ -2,16 +2,16 @@
 
 > 红莲！ simulate and control ur5
 
- 1. ros 
- 2. ur robot driver
- 3. moveit 
- 4. gazebo
+ 1. ROS Noetic
+ 2. UR robot driver  Version 2022/08
+ 3. moveit Moveit 1 Noetic
+ 4. gazebo Version 11
 
 ## Run
 
 ```
 // connect robot
-roslaunch ur_robot_driver ur5_bringup.launch robot_ip:=192.168.56.101
+roslaunch ur_robot_driver ur5_bringup.launch robot_ip:=192.168.130.105
 [gazebo] roslaunch zz_test ur5_gazebo_test.launch
 
 // make planing

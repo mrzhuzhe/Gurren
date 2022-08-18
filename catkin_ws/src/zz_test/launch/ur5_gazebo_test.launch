@@ -50,7 +50,7 @@
   <arg name="tf_pub_rate" default="125" doc="Rate at which robot_state_publisher should publish transforms."/>
 
   <!-- Gazebo parameters -->
-  <arg name="paused" default="false" doc="Starts Gazebo in paused mode" />
+  <arg name="paused" default="true" doc="Starts Gazebo in paused mode" />
   <arg name="gui" default="true" doc="Starts Gazebo gui" />
 
   <!-- Load urdf on the parameter server -->

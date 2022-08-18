@@ -9,14 +9,14 @@
     </include>
 
     <model name="RD9C37-LQ">
-      <pose>0 0.6 0.215 0 0 0</pose>
+      <pose>0.4 0.4 0.215 0 0 0</pose>
       <include>
         <uri>model://RD9C37-LQ</uri>
       </include>
     </model>
     
     <model name="box">
-      <pose>0 0.6 0.1 0 0 0</pose>
+      <pose>0.4 0.4 0.1 0 0 0</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
