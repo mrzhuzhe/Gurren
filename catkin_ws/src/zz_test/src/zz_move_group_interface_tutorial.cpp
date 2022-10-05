@@ -264,7 +264,7 @@ int main(int argc, char** argv)
   // max 311.95508195 179.15869388 -89.40987434
   
   // ar35
-  double origin_radius = 316.481, offset = 0.18;
+  double origin_radius = 316.481, offset = 0.18 - 0.05 - 0.09338/2;
   double _waypoints[][3] = {
     {131.52773071,  15.64555205,  -0.43032822},
     {133.1677714,   37.6218774,   -8.2831536 },
@@ -303,7 +303,7 @@ int main(int argc, char** argv)
   //double radius = 0.312, degs = 90-89.4, tableHeight = 0.1, waypoint_z = 0.1791;
   int _cur = 18 - 1;
   double radius = _waypoints[_cur][0] * 0.001, degs = 90 + _waypoints[_cur][2], tableHeight = 0.08, waypoint_z = _waypoints[_cur][1]* 0.001;
-  target_pose1.position.x = origin_radius + offset;
+  target_pose1.position.x = origin_radius + offset; // 0.399791
   target_pose1.position.y = origin_radius + offset;
   target_pose1.position.z = tableHeight + waypoint_z + 0.1;
   
