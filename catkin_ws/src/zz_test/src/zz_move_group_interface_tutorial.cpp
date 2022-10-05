@@ -229,12 +229,11 @@ int main(int argc, char** argv)
  };
   // ar35 end
 
-  int _cur = 26;  // 6 - 26
-  ROS_INFO_STREAM("_waypoints[_cur]" << _waypoints[_cur][0] << " " << _waypoints[_cur][1] << " " << _waypoints[_cur][2] << "\n");
-  double radius = _waypoints[_cur][0] * 0.001, degs = 90 + _waypoints[_cur][2], tableHeight = 0.08, waypoint_z = _waypoints[_cur][1]* 0.001;
+  int _cur = 5;  // 6 - end
+  int _len = sizeof(_waypoints) / sizeof(_waypoints[0]);
+  double tableHeight = 0.08, radius, degs, waypoint_z;   
   target_pose1.position.x = origin_radius + offset; // 0.399791
   target_pose1.position.y = origin_radius + offset;
-  target_pose1.position.z = tableHeight + waypoint_z + 0.1;
   
   /*
   move_group_interface.setPoseTarget(target_pose1);
@@ -285,37 +284,53 @@ int main(int argc, char** argv)
   //waypoints.push_back(target_pose1);
 
   //geometry_msgs::Pose target_pose3 = start_pose2;
-  geometry_msgs::Pose target_pose3 = target_pose1;
-
-  // zz test
-  // [BUG] initial point shall not been added to waypoints https://answers.ros.org/question/253004/moveit-problem-error-trajectory-message-contains-waypoints-that-are-not-strictly-increasing-in-time/
-  waypoints.push_back(target_pose1);
 
 
   
-  int theta = 100; // only 350 degree
-  for (; theta < 450; ++theta)
-    {
-        
-    //double r=0, p=3.14*2*(180+degs)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
-    double r=0, p=M_PI*2*(180+degs)/360, y=M_PI*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
-    q_rot.setRPY(r, p, y);
-    target_pose3.orientation.x = q_rot.getX();
-    target_pose3.orientation.y = q_rot.getY();
-    target_pose3.orientation.z = q_rot.getZ();
-    target_pose3.orientation.w = q_rot.getW();
-    
-    target_pose3.position.y = target_pose1.position.y + radius * cos(3.14*2*theta/360);
-    target_pose3.position.x = target_pose1.position.x + radius * sin(3.14*2*theta/360);
-    // avoid joint limit
-    target_pose3.position.z = target_pose1.position.z - 0.1;
-    waypoints.push_back(target_pose3);
+  // zz test
+  // [BUG] initial point shall not been added to waypoints https://answers.ros.org/question/253004/moveit-problem-error-trajectory-message-contains-waypoints-that-are-not-strictly-increasing-in-time/
+  geometry_msgs::Pose recover_pose = target_pose1;
+  geometry_msgs::Pose running_pose = target_pose1;
 
-    }
-  // [ERROR] [1659608954.356257928]: Trajectory message contains waypoints that are not strictly increasing in time
-  // return to a different point
-  target_pose1.position.z += 0.2;
-  waypoints.push_back(target_pose1);
+  for (int i = _cur; i < _len; ++i){
+
+    ROS_INFO_STREAM("_waypoints[_cur]" << _waypoints[i][0] << " " << _waypoints[i][1] << " " << _waypoints[i][2] << "\n");
+    radius = _waypoints[i][0] * 0.001, degs = 90 + _waypoints[i][2], waypoint_z = _waypoints[i][1]* 0.001;        
+    
+    recover_pose.position.z = tableHeight + waypoint_z + 0.1;
+    waypoints.push_back(recover_pose);
+        
+    int theta = 100; // only 350 degree
+    for (; theta < 450; ++theta)
+      {
+          
+      //double r=0, p=3.14*2*(180+degs)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
+      double r=0, p=M_PI*2*(180+degs)/360, y=M_PI*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
+      q_rot.setRPY(r, p, y);
+      running_pose.orientation.x = q_rot.getX();
+      running_pose.orientation.y = q_rot.getY();
+      running_pose.orientation.z = q_rot.getZ();
+      running_pose.orientation.w = q_rot.getW();
+      
+      running_pose.position.y = recover_pose.position.y + radius * cos(3.14*2*theta/360);
+      running_pose.position.x = recover_pose.position.x + radius * sin(3.14*2*theta/360);    
+      running_pose.position.z = tableHeight + waypoint_z;
+      waypoints.push_back(running_pose);
+
+      }
+    
+    // back
+    recover_pose.position.z = tableHeight + waypoint_z + 0.09;
+    waypoints.push_back(recover_pose);
+
+  }
+
+  // recover to higher
+  recover_pose.position.z += 0.1;
+  waypoints.push_back(recover_pose);
+
+
+    
 
   // We want the Cartesian path to be interpolated at a resolution of 1 cm
   // which is why we will specify 0.01 as the max step in Cartesian
