@@ -7,7 +7,7 @@ namespace rings_model
     //  most east and south point of rings
     const double DESK_OFFSET = 0.18 - 0.05 - 0.09338/2;
     //  
-    const double TABLE_HEIGHT = 0.08;
+    const double TABLE_HEIGHT = 0.08 + 0.015; // upper 15mm avoid hit table
     
 
     const double AR35_RADIUS = 0.316481;

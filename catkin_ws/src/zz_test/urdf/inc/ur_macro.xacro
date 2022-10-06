@@ -338,7 +338,7 @@
     <!--- zz start  -->
     <xacro:property name="camera_link" value="0.02" /> <!-- Size of square 'camera' box -->
     <joint name="camera_joint" type="fixed">
-      <origin xyz="0 0.05 0" rpy="0.0 ${-pi/2.0} ${-pi/2.0}" />
+      <origin xyz="0 0.06 0.05" rpy="0.0 ${-pi/2.0} ${-pi/2.0}" />
       <parent link="wrist_3_link"/>
       <child link="camera_link"/>
     </joint>
@@ -374,21 +374,21 @@
 
     <link name="ee_link">
       <collision>
-        <origin xyz="0 0 0.075" rpy="0 0 0"/>
+        <origin xyz="0 0 0.065" rpy="0 0 0"/>
         <geometry>
-          <cylinder length="0.14" radius="0.03"/>
+          <cylinder length="0.12" radius="0.05"/>
         </geometry>
       </collision>
 
       <visual>
-        <origin xyz="0 0 0.075" rpy="0 0 0"/>
+        <origin xyz="0 0 0.065" rpy="0 0 0"/>
         <geometry>
-          <cylinder length="0.14" radius="0.03"/>
+          <cylinder length="0.12" radius="0.05"/>
         </geometry>
       </visual>
 
       <inertial>
-        <origin xyz="0 0 0.075" rpy="0 0 0"/>
+        <origin xyz="0 0 0.065" rpy="0 0 0"/>
         <mass value="0.00001"/>
         <inertia
           ixx="0.00001" ixy="0.0" ixz="0.0"

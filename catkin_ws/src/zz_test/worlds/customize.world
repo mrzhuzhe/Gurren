@@ -9,7 +9,8 @@
     </include>
 
     <model name="ar35">
-      <pose>0.4 0.4 0.195 0 1.57 0</pose>
+      <static>true</static>
+      <pose>0.4 0.4 0.21 0 1.57 0</pose>
       <include>
         <uri>model://ar35</uri>
       </include>
