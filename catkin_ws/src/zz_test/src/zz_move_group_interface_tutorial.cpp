@@ -12,9 +12,8 @@
 
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 
-
-
-
+#include "rings_model.h"
+using namespace rings_model;
 
 // The circle constant tau = 2*pi. One tau is one rotation in radians.
 const double tau = 2 * M_PI;
@@ -173,10 +172,9 @@ int main(int argc, char** argv)
 
   // Start the demo
   // ^^^^^^^^^^^^^^^^^^^^^^^^^
-  visual_tools.prompt("Press 456456 'next' in the RvizVisualToolsGui window to start the demo");
+  visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to start the demo");
 
   tf2::Quaternion q_rot;
-  //double r=0, p=3.14, y=0;  // Rotate the previous pose by 180* about X
   double r=0, p=-M_PI, y=0;  // Rotate the previous pose by 180* about X
   q_rot.setRPY(r, p, y);
 
@@ -189,49 +187,14 @@ int main(int argc, char** argv)
   target_pose1.orientation.w = q_rot.getW();
   
   //target_pose1.orientation.w = 1;
-  //241.63190381 164.11916515 -66.55903408
-  // max 311.95508195 179.15869388 -89.40987434
+  double origin_radius = AR35_RADIUS, offset = DESK_OFFSET;
   
-  // ar35 start
-  double origin_radius = 0.316481, offset = 0.18 - 0.05 - 0.09338/2;
-  double _waypoints[][3] = {
-    {111.52829481 , 15.79576352 , -0.43032822},
-    {113.37640759 , 40.50318239 , -8.2831536 ,},
-    {116.55643712 , 56.95550696 ,-13.59613984},
-    {121.19111118 , 72.88308036 ,-18.8522062 ,},
-    {127.31303781 , 88.42468439 ,-24.14729109},
-    {134.79937422 ,103.2580389 , -29.41250812},
-    {143.54763533 ,117.24452073 ,-34.63785995},
-    {149.15940235 ,124.94619003 ,-37.59234425},
-    {154.41090118 ,131.45243789 ,-40.15283932},
-    {161.51906458 ,139.4074243 , -43.41189818},
-    {169.18424475 ,147.05434548 ,-46.72470837},
-    {177.22706957 ,154.20268131 ,-50.01494105},
-    {185.71291648 ,160.91168479 ,-53.32445744},
-    {192.43448597 ,165.69739 ,   -55.82593744},
-    {199.36573424 ,170.18088793 ,-58.32868148},
-    {207.97958475 ,175.18636729 ,-61.34977763},
-    {216.71372746 ,179.66822432 ,-64.32179369},
-    {225.72565251 ,183.7148857 , -67.31486085},
-    {230.72500664 ,185.72866997 ,-68.86638649},
-    {237.88819481 ,188.3287366 , -71.16986413},
-    {247.30137345 ,191.26720783 ,-74.15691788},
-    {256.79336088 ,193.6973136 , -77.12260501},
-    {257.22200786 ,193.79559161 ,-76.99712456},
-    {262.87719384 ,195.01184472 ,-78.67320359},
-    {269.8972906 , 196.28670024 ,-80.74113069},
-    {276.96895827 ,197.30866985 ,-82.81243603},
-    {284.05192781 ,198.07255512 ,-84.87663768},
-    {291.92973893 ,198.6175388 , -87.27514473},
-    {294.87957901 ,198.737655 ,  -88.00691118},
-    {298.66452937 ,198.83832971 ,-88.94587661},
-    {302.43500079 ,198.87697515 ,-89.87967904}
- };
+  //double _waypoints[][3] = waypoints::ar35[][3];
   // ar35 end
 
   int _cur = 5;  // 6 - end
-  int _len = sizeof(_waypoints) / sizeof(_waypoints[0]);
-  double tableHeight = 0.08, radius, degs, waypoint_z;   
+  int _len = sizeof(AR35) / sizeof(AR35[0]);
+  double tableHeight = TABLE_HEIGHT, radius, degs, waypoint_z;   
   target_pose1.position.x = origin_radius + offset; // 0.399791
   target_pose1.position.y = origin_radius + offset;
   
@@ -280,12 +243,6 @@ int main(int argc, char** argv)
   ROS_INFO_NAMED("tutorial", "x: %f y: %f z: %f w: %f", q_rot.getX(), q_rot.getY(), q_rot.getZ(), q_rot.getW());
 
   std::vector<geometry_msgs::Pose> waypoints;
-  //waypoints.push_back(start_pose2);
-  //waypoints.push_back(target_pose1);
-
-  //geometry_msgs::Pose target_pose3 = start_pose2;
-
-
   
   // zz test
   // [BUG] initial point shall not been added to waypoints https://answers.ros.org/question/253004/moveit-problem-error-trajectory-message-contains-waypoints-that-are-not-strictly-increasing-in-time/
@@ -294,8 +251,8 @@ int main(int argc, char** argv)
 
   for (int i = _cur; i < _len; ++i){
 
-    ROS_INFO_STREAM("_waypoints[_cur]" << _waypoints[i][0] << " " << _waypoints[i][1] << " " << _waypoints[i][2] << "\n");
-    radius = _waypoints[i][0] * 0.001, degs = 90 + _waypoints[i][2], waypoint_z = _waypoints[i][1]* 0.001;        
+    ROS_INFO_STREAM("_waypoints[_cur]" << AR35[i][0] << " " << AR35[i][1] << " " << AR35[i][2] << "\n");
+    radius = AR35[i][0] * 0.001, degs = 90 + AR35[i][2], waypoint_z = AR35[i][1]* 0.001;        
     
     recover_pose.position.z = tableHeight + waypoint_z + 0.1;
     waypoints.push_back(recover_pose);
@@ -304,7 +261,6 @@ int main(int argc, char** argv)
     for (; theta < 450; ++theta)
       {
           
-      //double r=0, p=3.14*2*(180+degs)/360, y=3.14*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
       double r=0, p=M_PI*2*(180+degs)/360, y=M_PI*2*(-theta-90)/360;  // Rotate the previous pose by 180* about X
       q_rot.setRPY(r, p, y);
       running_pose.orientation.x = q_rot.getX();
@@ -328,9 +284,6 @@ int main(int argc, char** argv)
   // recover to higher
   recover_pose.position.z += 0.1;
   waypoints.push_back(recover_pose);
-
-
-    
 
   // We want the Cartesian path to be interpolated at a resolution of 1 cm
   // which is why we will specify 0.01 as the max step in Cartesian
@@ -357,11 +310,6 @@ int main(int argc, char** argv)
   visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
 
   move_group_interface.execute(trajectory);
-
-  //target_pose1.position.z = 0.4;
-  //move_group_interface.setPoseTarget(target_pose1);
-  //move_group_interface.move();
-
 
   ros::shutdown();
   return 0;
