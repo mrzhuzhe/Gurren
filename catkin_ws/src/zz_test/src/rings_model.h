@@ -7,10 +7,12 @@ namespace rings_model
     //  most east and south point of rings
     const double DESK_OFFSET = 0.18 - 0.05 - 0.09338/2;
     //  
-    const double TABLE_HEIGHT = 0.08;
+    const double TABLE_HEIGHT = 0.095;
     
 
     const double AR35_RADIUS = 0.316481;
+
+    // (x radius z height degree )  must be multiply 0.001 
     const double AR35[][3] = {
         {111.52829481 , 15.79576352 , -0.43032822},
         {113.37640759 , 40.50318239 , -8.2831536 ,},

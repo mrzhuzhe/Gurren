@@ -336,14 +336,17 @@
     
     
     <!--- zz start  -->
-    <xacro:property name="camera_link" value="0.02" /> <!-- Size of square 'camera' box -->
+      <!-- Camera -->
+
+    <!-- 
+      <xacro:property name="camera_link" value="0.02" /> 
     <joint name="camera_joint" type="fixed">
-      <origin xyz="0 0.05 0" rpy="0.0 ${-pi/2.0} ${-pi/2.0}" />
+      <origin xyz="0 0.07 0" rpy="0.0 ${-pi/2.0} ${-pi/2.0}" />
       <parent link="wrist_3_link"/>
       <child link="camera_link"/>
     </joint>
 
-    <!-- Camera -->
+
     <link name="camera_link">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -364,7 +367,43 @@
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
       </inertial>
-    </link>    
+    </link> -->
+    
+    <!-- <xacro:include filename="$(find zz_test)/urdf/inc/camera.gazebo.xacro" /> -->
+
+    
+    <!-- end effector -->
+
+    <joint name="eelink_joint" type="fixed">
+      <origin xyz="0 0 0" />
+      <parent link="wrist_3_link"/>
+      <child link="eelink_link"/>
+    </joint>
+
+    <link name="eelink_link">
+      <collision>
+        <origin xyz="0 0 0.026" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="0.05" radius="0.03"/>
+        </geometry>
+      </collision>
+
+      <visual>
+        <origin xyz="0 0 0.026" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="0.05" radius="0.03"/>
+        </geometry>
+      </visual>
+
+      <inertial>
+        <origin xyz="0 0 0.026" rpy="0 0 0"/>
+        <mass value="0.00001"/>
+        <inertia
+          ixx="0.00001" ixy="0.0" ixz="0.0"
+          iyy="0.00001" iyz="0.0"
+          izz="0.00001"/>
+      </inertial>
+    </link>  
 
     <joint name="ee_joint" type="fixed">
       <origin xyz="0 0 0" />
@@ -374,21 +413,21 @@
 
     <link name="ee_link">
       <collision>
-        <origin xyz="0 0 0.075" rpy="0 0 0"/>
+        <origin xyz="0 0 0.086" rpy="0 0 0"/>
         <geometry>
-          <cylinder length="0.14" radius="0.03"/>
+          <cylinder length="0.07" radius="0.05"/>
         </geometry>
       </collision>
 
       <visual>
-        <origin xyz="0 0 0.075" rpy="0 0 0"/>
+        <origin xyz="0 0 0.086" rpy="0 0 0"/>
         <geometry>
-          <cylinder length="0.14" radius="0.03"/>
+          <cylinder length="0.07" radius="0.05"/>
         </geometry>
       </visual>
 
       <inertial>
-        <origin xyz="0 0 0.075" rpy="0 0 0"/>
+        <origin xyz="0 0 0.086" rpy="0 0 0"/>
         <mass value="0.00001"/>
         <inertia
           ixx="0.00001" ixy="0.0" ixz="0.0"
@@ -396,9 +435,39 @@
           izz="0.00001"/>
       </inertial>
     </link>  
+
+    <joint name="touch_joint" type="fixed">
+      <origin xyz="0 0 0" />
+      <parent link="wrist_3_link"/>
+      <child link="touch_link"/>
+    </joint>
+
+    <link name="touch_link">
+      <collision>
+        <origin xyz="0 0 0.146" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="0.04" radius="0.03"/>
+        </geometry>
+      </collision>
+
+      <visual>
+        <origin xyz="0 0 0.146" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="0.04" radius="0.03"/>
+        </geometry>
+      </visual>
+
+      <inertial>
+        <origin xyz="0 0 0.146" rpy="0 0 0"/>
+        <mass value="0.00001"/>
+        <inertia
+          ixx="0.00001" ixy="0.0" ixz="0.0"
+          iyy="0.00001" iyz="0.0"
+          izz="0.00001"/>
+      </inertial>
+    </link> 
     <!--- zz end  -->
   
   </xacro:macro>
 
-  <xacro:include filename="$(find zz_test)/urdf/inc/camera.gazebo.xacro" />
 </robot>
