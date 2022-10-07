@@ -192,7 +192,7 @@ int main(int argc, char** argv)
   //double _waypoints[][3] = waypoints::ar35[][3];
   // ar35 end
 
-  int _cur = 6;  // 6 - end
+  int _cur = 5;  // 6 - (end - 2) 
   int _len = sizeof(AR35) / sizeof(AR35[0]);
   double tableHeight = TABLE_HEIGHT, radius, degs, waypoint_z;   
   target_pose1.position.x = origin_radius + offset; // 0.399791
