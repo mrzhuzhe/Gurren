@@ -189,10 +189,8 @@ int main(int argc, char** argv)
   //target_pose1.orientation.w = 1;
   double origin_radius = AR35_RADIUS, offset = DESK_OFFSET;
   
-  //double _waypoints[][3] = waypoints::ar35[][3];
-  // ar35 end
 
-  int _cur = 5;  // 6 - (end - 2) 
+  int _cur = 4;  // 6 - (end - 2) is safe  AR35SP can be 4   AR35 must start with 5
   int _len = sizeof(AR35_SP) / sizeof(AR35_SP[0]);
 
   double tableHeight = TABLE_HEIGHT, radius, degs, waypoint_z;   
@@ -250,8 +248,8 @@ int main(int argc, char** argv)
   geometry_msgs::Pose recover_pose = target_pose1;
   geometry_msgs::Pose running_pose = target_pose1;
 
-  //for (int i = _cur; i < _len - 2; ++i){
-  for (int i = _cur; i < _cur + 1; ++i){
+  for (int i = _cur; i < _len; ++i){
+  //for (int i = _cur; i < _cur + 1; ++i){
     
     ROS_INFO_STREAM("_waypoints[_cur]" << AR35_SP[i][0] << " " << AR35_SP[i][1] << " " << AR35_SP[i][2] << "\n");
     radius = AR35_SP[i][0] * 0.001, degs = 90 + AR35_SP[i][2], waypoint_z = AR35_SP[i][1]* 0.001;        
