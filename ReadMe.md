@@ -40,6 +40,12 @@ roslaunch zz_test move_group_interface_tutorial.launch
 ```
 # install ROS Noetic first
 
+# install rosdep
+sudo apt-get install python3-rosdep
+sudo rosdep init
+rosdep update
+
+
 # then pull all submodules
 git pull --recurse-submodules
 
