@@ -248,8 +248,8 @@ int main(int argc, char** argv)
   geometry_msgs::Pose recover_pose = target_pose1;
   geometry_msgs::Pose running_pose = target_pose1;
 
-  for (int i = _cur; i < _len; ++i){
-  //for (int i = _cur; i < _cur + 1; ++i){
+  //for (int i = _cur; i < _len; ++i){
+  for (int i = _cur; i < _cur + 1; ++i){
     
     ROS_INFO_STREAM("_waypoints[_cur]" << AR35_SP[i][0] << " " << AR35_SP[i][1] << " " << AR35_SP[i][2] << "\n");
     radius = AR35_SP[i][0] * 0.001, degs = 90 + AR35_SP[i][2], waypoint_z = AR35_SP[i][1]* 0.001;        

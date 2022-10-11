@@ -40,8 +40,14 @@ roslaunch zz_test move_group_interface_tutorial.launch
 ```
 # install ROS Noetic first
 
-# then pull all submodules
-git pull --recurse-submodules
+# then install rosdep
+sudo apt-get install python3-rosdep
+sudo rosdep init
+rosdep update
+
+
+# then clone all submodules
+git clone --recursive git@github.com:mrzhuzhe/Gurren.git
 
 # install dependencies
 $ sudo apt update -qq
@@ -49,6 +55,7 @@ $ rosdep update
 $ rosdep install --from-paths src --ignore-src -y
 
 # build the workspace
+$ cd catkin_ws
 $ catkin_make
 
 # activate the workspace (ie: source it)
