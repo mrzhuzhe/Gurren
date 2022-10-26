@@ -40,7 +40,7 @@
     <model name="camera_model">
       <static>true</static>
       <pose>-1.25 0.5 0.5 0 0 0</pose>
-      <link name="camera_link">
+      <link name="world_camera_link">
         <visual name="visual">
           <geometry>
             <box>
@@ -76,8 +76,8 @@
         </sensor>
       </link>
 
-      <joint name="camera_joint" type="fixed">
-        <child>camera_link</child>
+      <joint name="world_camera_joint" type="fixed">
+        <child>world_camera_link</child>
         <parent>world</parent>
       </joint> 
 
