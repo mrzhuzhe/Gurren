@@ -1,5 +1,29 @@
 # Milestone
 
+
+## compliant control 
+
+> version 0.2
+
+Reference:  
+
+1. https://github.com/MingshanHe/Compliant-Control-and-Application
+
+
+
+------------------------
+
+
+
+
+
+
+
+
+
+
+> version 0.1
+
 ## Key concepts
 
 1. be familar with Rviz / Moveit / Gazebo 
