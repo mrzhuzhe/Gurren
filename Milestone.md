@@ -8,7 +8,7 @@
 Reference:  
 
 1. https://github.com/MingshanHe/Compliant-Control-and-Application
-
+2. scaled joint trajectory controllers https://github.com/UniversalRobots/Universal_Robots_ROS_scaled_controllers/tree/main/scaled_joint_trajectory_controller
 
 
 ------------------------
