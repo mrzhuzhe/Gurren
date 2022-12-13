@@ -1,6 +1,9 @@
 
 # Franka test
 
+> franka ros controller example for customerize ros controller
+ 
+
 # build
 
 ```
@@ -17,3 +20,9 @@ roslaunch franka_gazebo panda.launch x:=-0.5 \
     controller:=my_test_controller \
     rviz:=true
 ```
+
+# Reffer
+
+1. https://frankaemika.github.io/docs/franka_ros.html#writing-your-own-controller
+2. http://wiki.ros.org/ros_control/Tutorials 
+3. https://github.com/ros-controls/ros_control/wiki/hardware_interface hardware interface
