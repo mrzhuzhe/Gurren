@@ -1,3 +1,0 @@
-- builder: doxygen
-  javadoc_autobrief: YES
-  exclude_patterns: test
