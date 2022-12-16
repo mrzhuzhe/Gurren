@@ -1,0 +1,7 @@
+<library path="lib/libtest_controller">
+  <class name="test_controller/TestController" type="test_controller::Test_Controller" base_class_type="controller_interface::ControllerBase">
+    <description>
+        test controler
+    </description>
+  </class>
+</library>
