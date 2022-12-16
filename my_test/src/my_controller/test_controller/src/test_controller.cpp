@@ -10,8 +10,19 @@ namespace test_controller {
     /** \brief Initialize the kinematic chain for kinematics-based computation.
     *
     */
-    bool Test_Controller::init(hardware_interface::PositionJointInterface *robot, ros::NodeHandle &n) {
+    bool Test_Controller::init(hardware_interface::PositionJointInterface *robot, ros::NodeHandle &node_handle) {
         ROS_INFO("Test_Controller init");
+        
+        //  read param out side
+        std::string name_space = node_handle.getNamespace();
+        std::string test_value;
+        if (!node_handle.getParam(name_space + "/arm_id", test_value)) {
+            ROS_ERROR("TestController: Could not read parameter test_value");
+            return false;
+        } else {
+            ROS_INFO_STREAM("test_value: " << test_value);
+        }
+
         return true;
     }
 
