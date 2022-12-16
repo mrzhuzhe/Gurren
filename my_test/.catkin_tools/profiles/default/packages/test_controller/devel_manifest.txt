@@ -1,6 +1,0 @@
-my_controller/test_controller
-/mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/my_test/devel/.private/test_controller/cmake.lock /mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/my_test/devel/./cmake.lock
-/mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/my_test/devel/.private/test_controller/share/test_controller/cmake/test_controllerConfig.cmake /mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/my_test/devel/share/test_controller/cmake/test_controllerConfig.cmake
-/mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/my_test/devel/.private/test_controller/share/test_controller/cmake/test_controllerConfig-version.cmake /mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/my_test/devel/share/test_controller/cmake/test_controllerConfig-version.cmake
-/mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/my_test/devel/.private/test_controller/lib/libtest_controller.so /mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/my_test/devel/lib/libtest_controller.so
-/mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/my_test/devel/.private/test_controller/lib/pkgconfig/test_controller.pc /mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/my_test/devel/lib/pkgconfig/test_controller.pc
