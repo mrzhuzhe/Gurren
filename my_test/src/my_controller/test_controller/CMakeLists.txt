@@ -122,6 +122,7 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 #   src/${PROJECT_NAME}/test_controller.cpp
 # )
 add_library(${PROJECT_NAME}
+  include/test_controller/test_controller.h
   src/test_controller.cpp
 )
 
