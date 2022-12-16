@@ -1,19 +1,6 @@
 # My controller test
 
-
-## RoadMap
-
-### about custom controller 
-
-1. setup ur5 and ur5e driver [ok]
-2. create a controller template [ok]
-3. add robot state print in controller template
-4. implement a cartesian controller
-5. implement a force cartesian algorithem
-
-### about hardware interface 
-1. customer a robot hardware reffer to ur_cartesian
-
+## Run
 
 ```
 
@@ -22,6 +9,37 @@ roslaunch ur_gazebo ur5_bringup.launch
 roslaunch ur_gazebo ur5e_bringup.launch 
 
 ```
+
+## Install
+
+```
+
+catkin build
+
+// install controller plugins
+rosdep install -i --from-path src --rosdistro noetic --ignore-src -r -y
+
+```
+
+## RoadMap
+
+### about custom controller 
+
+1. setup ur5 and ur5e driver [ok]
+2. create a controller template [ok]
+3. add new controller to ur
+    ```
+        //  Check list:
+        
+        /my_test/src/robots/universal_robot/fmauch_universal_robot/ur_gazebo/config/ur5e_controllers.yaml
+    ```
+4. add robot state print in controller template
+5. implement a cartesian controller
+6. implement a force cartesian algorithem
+
+### about hardware interface 
+1. customer a robot hardware reffer to ur_cartesian
+
 
 
 ## References

@@ -11,6 +11,7 @@ namespace test_controller {
     *
     */
     bool Test_Controller::init(hardware_interface::PositionJointInterface *robot, ros::NodeHandle &n) {
+        ROS_INFO("Test_Controller init");
         return true;
     }
 
@@ -20,7 +21,7 @@ namespace test_controller {
     * \param time The current time
     */
     void Test_Controller::starting(const ros::Time& time){
-
+        ROS_INFO("Test_Controller starting");
     }
 
     /*!
