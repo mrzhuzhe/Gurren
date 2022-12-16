@@ -5,7 +5,6 @@
 #include <pluginlib/class_list_macros.h>
 #include <ros/ros.h>
 
-
 namespace test_controller {
     /** \brief Initialize the kinematic chain for kinematics-based computation.
     *
@@ -16,13 +15,12 @@ namespace test_controller {
         //  read param out side
         std::string name_space = node_handle.getNamespace();
         std::string test_value;
-        if (!node_handle.getParam(name_space + "/arm_id", test_value)) {
+        if (!node_handle.getParam(name_space + "/test_value", test_value)) {
             ROS_ERROR("TestController: Could not read parameter test_value");
             return false;
         } else {
             ROS_INFO_STREAM("test_value: " << test_value);
         }
-
         return true;
     }
 
@@ -32,6 +30,8 @@ namespace test_controller {
     * \param time The current time
     */
     void Test_Controller::starting(const ros::Time& time){
+
+        
         ROS_INFO("Test_Controller starting");
     }
 
@@ -39,7 +39,9 @@ namespace test_controller {
     * \brief Issues commands to the joint. Should be called at regular intervals
     */
     void Test_Controller::update(const ros::Time& time, const ros::Duration& period) {
-
+        
+        
+        ROS_INFO_STREAM("LOOPRATE");
     }
 
     /********************************************/

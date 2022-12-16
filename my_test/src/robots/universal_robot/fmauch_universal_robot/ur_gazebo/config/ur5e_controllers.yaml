@@ -35,7 +35,7 @@ joint_group_pos_controller:
 test_controller:
   type: test_controller/TestController
   publish_rate: 125
-  test_value: aabba
+  test_value: ImTestValue
   root_name: base_link
   tip_name: wrist_3_link
   joints:

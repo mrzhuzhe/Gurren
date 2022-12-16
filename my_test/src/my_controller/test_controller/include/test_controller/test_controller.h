@@ -44,7 +44,7 @@ namespace test_controller {
             */
             void writeVelocityCommands(const ros::Duration& period);
             void writePositionCommands(const ros::Duration& period);
-
+                    
         protected:
             /*
             KDL::JntArray                   Jnt_Vel_Cmd_;      // Desired joint velocity

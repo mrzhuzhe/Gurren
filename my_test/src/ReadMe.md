@@ -27,13 +27,13 @@ rosdep install -i --from-path src --rosdistro noetic --ignore-src -r -y
 
 1. setup ur5 and ur5e driver [ok]
 2. create a controller template [ok]
-3. add new controller to ur
+3. add new controller to ur [ok]
     ```
         //  Check list:
         
         /my_test/src/robots/universal_robot/fmauch_universal_robot/ur_gazebo/config/ur5e_controllers.yaml
     ```
-4. add robot state print in controller template
+4. add robot state print in controller template [need KDL parser]
 5. implement a cartesian controller
 6. implement a force cartesian algorithem
 
@@ -57,3 +57,4 @@ rosdep install -i --from-path src --rosdistro noetic --ignore-src -r -y
     Bug in this repo
 
     sudo apt-get install ros-noetic-rqt-controller-manager
+6. http://wiki.ros.org/kdl_parser KDL
