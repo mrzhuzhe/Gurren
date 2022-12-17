@@ -1,14 +1,15 @@
-#ifndef TEST_CONTROLLER_H
-#define TEST_CONTROLLER_H
+#ifndef CARTESIAN_CONTROLLER_H
+#define CARTESIAN_CONTROLLER_H
 
 
 #include <ros/node_handle.h>
-
 #include <controller_interface/controller.h>
 #include <hardware_interface/joint_command_interface.h>
 
+#include "kdl_base.h"
+
 namespace cartesian_controller {
-    class Cartesian_Controller: public controller_interface::Controller<hardware_interface::PositionJointInterface>{
+    class Cartesian_Controller: public kdl_base::KDL_Base{
         public:
             Cartesian_Controller() {}
             ~Cartesian_Controller() {}

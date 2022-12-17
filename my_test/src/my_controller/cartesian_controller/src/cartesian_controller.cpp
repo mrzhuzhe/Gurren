@@ -5,6 +5,8 @@
 #include <pluginlib/class_list_macros.h>
 #include <ros/ros.h>
 
+#include "cartesian_controller/kdl_base.h"
+
 namespace cartesian_controller {
     /** \brief Initialize the kinematic chain for kinematics-based computation.
     *
@@ -12,6 +14,9 @@ namespace cartesian_controller {
     bool Cartesian_Controller::init(hardware_interface::PositionJointInterface *robot, ros::NodeHandle &node_handle) {
         ROS_INFO("Cartesian Controller init");
         
+        // KDL
+        kdl_base::KDL_Base::init(robot, node_handle);
+
         //  read param out side
         std::string name_space = node_handle.getNamespace();
         std::string test_value;
