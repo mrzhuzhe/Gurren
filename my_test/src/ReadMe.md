@@ -57,4 +57,4 @@ rosdep install -i --from-path src --rosdistro noetic --ignore-src -r -y
     Bug in this repo
 
     sudo apt-get install ros-noetic-rqt-controller-manager
-6. http://wiki.ros.org/kdl_parser KDL
+6. http://wiki.ros.org/kdl KDL

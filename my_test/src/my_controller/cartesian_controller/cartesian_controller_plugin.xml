@@ -1,0 +1,7 @@
+<library path="lib/libcartesian_controller">
+  <class name="cartesian_controller/CartesianController" type="cartesian_controller::Cartesian_Controller" base_class_type="controller_interface::ControllerBase">
+    <description>
+        cartesian controller with kdl
+    </description>
+  </class>
+</library>

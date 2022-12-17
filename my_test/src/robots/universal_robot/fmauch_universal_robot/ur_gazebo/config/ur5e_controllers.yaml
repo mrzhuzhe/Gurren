@@ -45,3 +45,17 @@ test_controller:
     - wrist_1_joint
     - wrist_2_joint
     - wrist_3_joint
+
+cartesian_controller:
+  type: cartesian_controller/CartesianController
+  publish_rate: 125
+  test_value: ImTestValue
+  root_name: base_link
+  tip_name: wrist_3_link
+  joints:
+    - shoulder_pan_joint
+    - shoulder_lift_joint
+    - elbow_joint
+    - wrist_1_joint
+    - wrist_2_joint
+    - wrist_3_joint
