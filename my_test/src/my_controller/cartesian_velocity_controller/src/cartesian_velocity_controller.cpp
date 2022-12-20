@@ -47,7 +47,7 @@ namespace cartesian_velocity_controller {
 
         // Variable init
         this->joint_state_.resize(this->kdl_chain_.getNrOfJoints());
-        this->joint_effort_.resize(this->kdl_chain_.getNrOfJoints());
+        //this->joint_effort_.resize(this->kdl_chain_.getNrOfJoints());
         Jnt_Vel_Cmd_.resize(this->kdl_chain_.getNrOfJoints());
         End_Vel_Cmd_ = KDL::Twist::Zero();
         End_Pos_.p.Zero();
@@ -71,7 +71,6 @@ namespace cartesian_velocity_controller {
             Jnt_Vel_Cmd_(i) = 0.0;
             this->joint_state_.q(i)     = 0.0;
             this->joint_state_.qdot(i)  = 0.0;
-            this->joint_effort_(i)    = 0.0;
         }
         End_Vel_Cmd_ = KDL::Twist::Zero();
         last_publish_time_ = time;
@@ -85,15 +84,21 @@ namespace cartesian_velocity_controller {
         // Get joint positions
         for(std::size_t i=0; i < this->joint_handles_.size(); i++)
         {
-            // if(fabs(this->joint_handles_[i].getPosition()-(this->joint_state_.q(i) + Jnt_Vel_Cmd_(i)*period.toSec()))<0.0000001 || Jnt_Vel_Cmd_(i)!=0)
-            // {
+            if(fabs(this->joint_handles_[i].getPosition()-(this->joint_state_.q(i) + Jnt_Vel_Cmd_(i)*period.toSec()))<0.0000001 
+            || Jnt_Vel_Cmd_(i)!=0
+            )  //  joint will keep running without 
+            {
             this->joint_state_.q(i)         = this->joint_handles_[i].getPosition();
             this->joint_state_.qdot(i)      = this->joint_handles_[i].getVelocity();
-            this->joint_effort_(i)        = this->joint_handles_[i].getEffort();
-            // }
+            }
         }
+       
         // Compute inverse kinematics velocity solver
+        //  http://docs.ros.org/en/hydro/api/orocos_kdl/html/classKDL_1_1ChainIkSolverVel.html
         ik_vel_solver_->CartToJnt(this->joint_state_.q, End_Vel_Cmd_, Jnt_Vel_Cmd_);
+
+        
+
         writeVelocityCommands(period);
 
         // Forward kinematics
@@ -113,6 +118,9 @@ namespace cartesian_velocity_controller {
             tf::poseKDLToMsg(End_Pos_, realtime_pub_->msg_.pose);
             tf::twistKDLToMsg(End_Vel_.GetTwist(), realtime_pub_->msg_.twist);
 
+            //  http://docs.ros.org/en/indigo/api/orocos_kdl/html/classKDL_1_1Frame.html
+            //ROS_INFO("End_Pos_ %f %f %f", End_Pos_.p(0), End_Pos_.p(1), End_Pos_.p(2));
+            
             realtime_pub_->unlockAndPublish();
             }
         }
@@ -123,6 +131,7 @@ namespace cartesian_velocity_controller {
     * \brief Subscriber's callback: copies twist commands
     */
     void Cartesian_Velocity_Controller::command_cart_vel(const geometry_msgs::TwistConstPtr &msg) {
+        
         End_Vel_Cmd_.vel(0) = msg->linear.x;
         End_Vel_Cmd_.vel(1) = msg->linear.y;
         End_Vel_Cmd_.vel(2) = msg->linear.z;
@@ -141,9 +150,10 @@ namespace cartesian_velocity_controller {
     */
     void Cartesian_Velocity_Controller::writeVelocityCommands(
                                         const ros::Duration& period) {
-        for(std::size_t i=0; i < this->joint_handles_.size(); i++) {
-        this->joint_handles_[i].setCommand(this->joint_state_.q(i)
-                                        + Jnt_Vel_Cmd_(i)*period.toSec());
+                                            
+
+        for(std::size_t i=0; i < this->joint_handles_.size(); i++) {                   
+            this->joint_handles_[i].setCommand(this->joint_state_.q(i) + Jnt_Vel_Cmd_(i)*period.toSec());
         }
     }
 
