@@ -123,7 +123,9 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 # )
 add_library(${PROJECT_NAME}
   include/cartesian_velocity_controller/cartesian_velocity_controller.h
+  #include/cartesian_velocity_controller/cartesian_velocity_position_controller.h
   src/cartesian_velocity_controller.cpp
+  src/cartesian_velocity_position_controller.cpp
 )
 
 ## Add cmake target dependencies of the library

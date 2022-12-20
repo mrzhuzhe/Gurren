@@ -1,5 +1,5 @@
-#ifndef TEST_CONTROLLER_H
-#define TEST_CONTROLLER_H
+#ifndef CARTESIAN_VELOCITY_CONTROLLER_H
+#define CARTESIAN_VELOCITY_CONTROLLER_H
 
 
 #include <ros/node_handle.h>
