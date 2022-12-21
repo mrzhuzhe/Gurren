@@ -55,6 +55,8 @@ namespace cartesian_velocity_position_controller {
             * \brief Subscriber's callback function
             */
             void command_cart_vel(const geometry_msgs::TwistConstPtr &msg);
+
+            void command_cart_pos(const geometry_msgs::PoseConstPtr &msg);
         private:
             /** \brief Write current commands to the hardware interface
             */
@@ -65,6 +67,10 @@ namespace cartesian_velocity_position_controller {
 
             ros::Time                       last_publish_time_;
             double                          publish_rate_;
+
+            KDL::Rotation                   End_Pos_Rotation;
+            KDL::Vector                     End_Pos_Vector;
+            KDL::Frame                      End_Pos_Cmd_;      // Desired end-effector position
 
             KDL::JntArray                   Jnt_Vel_Cmd_;      // Desired joint velocity
             KDL::Twist                      End_Vel_Cmd_;      // Desired end-effector velocity

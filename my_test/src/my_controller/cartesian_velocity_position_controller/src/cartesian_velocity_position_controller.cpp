@@ -47,6 +47,11 @@ namespace cartesian_velocity_position_controller {
             &Cartesian_Velocity_Position_Controller::command_cart_vel, this,
             ros::TransportHints().reliable().tcpNoDelay());
 
+        // Topics
+        sub_command_ = n.subscribe("command_cart_pos", 5,
+            &Cartesian_Velocity_Position_Controller::command_cart_pos, this,
+            ros::TransportHints().reliable().tcpNoDelay());
+
         // Variable init
         this->joint_state_.resize(this->kdl_chain_.getNrOfJoints());
         //this->joint_effort_.resize(this->kdl_chain_.getNrOfJoints());
@@ -82,6 +87,8 @@ namespace cartesian_velocity_position_controller {
     * \brief Issues commands to the joint. Should be called at regular intervals
     */
     void Cartesian_Velocity_Position_Controller::update(const ros::Time& time, const ros::Duration& period) {
+
+        
         
         // Get joint positions
         for(std::size_t i=0; i < this->joint_handles_.size(); i++)
@@ -126,6 +133,12 @@ namespace cartesian_velocity_position_controller {
             realtime_pub_->unlockAndPublish();
             }
         }
+
+        for (int i; i< 3; i++){
+            //direction End_Vel_Cmd_.vel = (End_Pos_Cmd_.p - End_Pos_.p).normalize()
+            End_Vel_Cmd_.vel = (End_Pos_Cmd_.p - End_Pos_.p);
+        }
+        // 
         //ROS_INFO_STREAM("LOOPRATE");
     }
 
@@ -140,6 +153,28 @@ namespace cartesian_velocity_position_controller {
         End_Vel_Cmd_.rot(0) = msg->angular.x;
         End_Vel_Cmd_.rot(1) = msg->angular.y;
         End_Vel_Cmd_.rot(2) = msg->angular.z;
+    }
+
+    
+    void Cartesian_Velocity_Position_Controller::command_cart_pos(const geometry_msgs::PoseConstPtr &msg) {
+        //ROS_INFO("position %f %f %f", msg->position.x, msg->position.y, msg->position.z);
+        
+        double x,y,z,w;
+        x = msg->orientation.x;
+        y = msg->orientation.y;
+        z = msg->orientation.z;
+        w = msg->orientation.w;
+        // End_Pos_Rotation.GetQuaternion(x,y,z,w);
+        // std::cout<<End_Pos_Rotation<<std::endl;
+
+        End_Pos_Vector[0] = msg->position.x;
+        End_Pos_Vector[1] = msg->position.y;
+        End_Pos_Vector[2] = msg->position.z;
+
+        End_Pos_Cmd_.p = End_Pos_Vector;
+        End_Pos_Cmd_.M = End_Pos_Rotation.Quaternion(x,y,z,w);
+        
+    
     }
 
     /********************************************/
