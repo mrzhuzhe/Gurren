@@ -129,15 +129,26 @@ namespace cartesian_velocity_position_controller {
 
             //  http://docs.ros.org/en/indigo/api/orocos_kdl/html/classKDL_1_1Frame.html
             //ROS_INFO("End_Pos_ %f %f %f", End_Pos_.p(0), End_Pos_.p(1), End_Pos_.p(2));
-            
+            double _x = 0, _y = 0, _z = 0, _w = 0;
+
+            End_Pos_.M.GetQuaternion(_x, _y, _z, _w);
+            ROS_INFO("End_Pos_ %f %f %f %f", _x, _y, _z, _w);
+
             realtime_pub_->unlockAndPublish();
             }
         }
 
         for (int i; i< 3; i++){
             //direction End_Vel_Cmd_.vel = (End_Pos_Cmd_.p - End_Pos_.p).normalize()
-            End_Vel_Cmd_.vel = (End_Pos_Cmd_.p - End_Pos_.p);
+            KDL::Vector _vec = (End_Pos_Cmd_.p - End_Pos_.p);
+            End_Vel_Cmd_.vel = 1 * _vec / _vec.Norm();
+
+            KDL::Rotation _rot = End_Pos_.M.Inverse() * End_Pos_Cmd_.M;
+            End_Vel_Cmd_.rot = _rot.GetRot();
+
         }
+
+
         // 
         //ROS_INFO_STREAM("LOOPRATE");
     }
