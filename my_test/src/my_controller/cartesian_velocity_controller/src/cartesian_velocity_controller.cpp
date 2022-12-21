@@ -18,7 +18,7 @@ namespace cartesian_velocity_controller {
         std::string test_value;
         if (!node_handle.getParam(name_space + "/test_value", test_value)) {
             ROS_ERROR("Cartesian_Velocity_Controller: Could not read parameter test_value");
-            return false;cartesian_velocity_controller
+            return false;
         } else {
             ROS_INFO_STREAM("test_value: " << test_value);
         }

@@ -1,0 +1,9 @@
+<library path="lib/libcartesian_velocity_position_controller">
+ 
+  <class name="cartesian_velocity_position_controller/CartesianVelocityPositionController" type="cartesian_velocity_position_controller::Cartesian_Velocity_Position_Controller" base_class_type="controller_interface::ControllerBase">
+    <description>
+        cartesian_velocity_position_controller
+    </description>
+  </class>
+  
+</library>

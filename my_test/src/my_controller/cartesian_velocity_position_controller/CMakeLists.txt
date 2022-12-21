@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(cartesian_velocity_controller)
+project(cartesian_velocity_position_controller)
 
 ## Add support for C++11, supported in ROS Kinetic and newer
 # add_definitions(-std=c++11)
@@ -19,6 +19,7 @@ find_package(catkin REQUIRED COMPONENTS
   kdl_parser
   kdl_conversions
   cartesian_state_msgs
+  cartesian_velocity_controller
 )
 set(CMAKE_CXX_FLAGS "-O2 -O3 -std=c++11 -mtune=native -fPIC -Wall -Wno-deprecated-declarations")
 
@@ -104,8 +105,8 @@ set(CMAKE_CXX_FLAGS "-O2 -O3 -std=c++11 -mtune=native -fPIC -Wall -Wno-deprecate
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES cartesian_velocity_controller
-  DEPENDS cartesian_state_msgs
+  LIBRARIES cartesian_velocity_position_controller
+  DEPENDS cartesian_state_msgs cartesian_velocity_controller
 )
 
 ###########
@@ -122,8 +123,8 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 #   src/${PROJECT_NAME}/cartesian_velocity_controller.cpp
 # )
 add_library(${PROJECT_NAME}
-  include/cartesian_velocity_controller/cartesian_velocity_controller.h
-  src/cartesian_velocity_controller.cpp
+  include/cartesian_velocity_position_controller/cartesian_velocity_position_controller.h
+  src/cartesian_velocity_position_controller.cpp
 )
 
 ## Add cmake target dependencies of the library
