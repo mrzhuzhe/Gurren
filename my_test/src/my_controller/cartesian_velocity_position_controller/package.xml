@@ -51,7 +51,6 @@
   <build_depend>cmake_modules</build_depend>
   <build_depend>eigen</build_depend>
   <build_depend>cartesian_state_msgs</build_depend>
-  <build_depend>cartesian_velocity_controller</build_depend>
 
   <run_depend>controller_interface</run_depend>
   <run_depend>control_msgs</run_depend>
@@ -63,7 +62,6 @@
   <run_depend>kdl_conversions</run_depend>
   <run_depend>eigen</run_depend>
   <run_depend>cartesian_state_msgs</run_depend>
-  <run_depend>cartesian_velocity_controller</run_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

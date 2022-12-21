@@ -15,7 +15,6 @@
 #include <kdl/chainfksolverpos_recursive.hpp>
 #include <realtime_tools/realtime_publisher.h>
 #include "kdl_base.h"
-//#include "cartesian_velocity_controller.h>"
 
 namespace cartesian_velocity_position_controller {
     //class Cartesian_Velocity_Position_Controller: public cartesian_velocity_controller::Cartesian_Velocity_Controller {
@@ -24,6 +23,7 @@ namespace cartesian_velocity_position_controller {
             Cartesian_Velocity_Position_Controller() {}
             ~Cartesian_Velocity_Position_Controller() {}
             void testfun(void);
+            
             /** \brief The init function is called to initialize the controller from a
             * non-realtime thread with a pointer to the hardware interface, itself,
             * instead of a pointer to a RobotHW.
@@ -50,6 +50,35 @@ namespace cartesian_velocity_position_controller {
             * \brief Issues commands to the joint. Called at regular intervals
             */
             void update(const ros::Time& time, const ros::Duration& period);
+
+            /*!
+            * \brief Subscriber's callback function
+            */
+            void command_cart_vel(const geometry_msgs::TwistConstPtr &msg);
+        private:
+            /** \brief Write current commands to the hardware interface
+            */
+            void writeVelocityCommands(const ros::Duration& period);
+                    
+        protected:
+            ros::Subscriber                 sub_command_; // Interface to external commands
+
+            ros::Time                       last_publish_time_;
+            double                          publish_rate_;
+
+            KDL::JntArray                   Jnt_Vel_Cmd_;      // Desired joint velocity
+            KDL::Twist                      End_Vel_Cmd_;      // Desired end-effector velocity
+            KDL::FrameVel                   End_Vel_;
+            KDL::Frame                      End_Pos_;
+            cartesian_state_msgs::PoseTwist msg_state_;
+
+
+            boost::shared_ptr<KDL::ChainFkSolverVel> fk_vel_solver_;
+            boost::shared_ptr<KDL::ChainFkSolverPos> fk_pos_solver_;
+            boost::shared_ptr<KDL::ChainIkSolverVel> ik_vel_solver_;
+
+            boost::shared_ptr<realtime_tools::RealtimePublisher<
+                cartesian_state_msgs::PoseTwist> > realtime_pub_;
 
     };
 }

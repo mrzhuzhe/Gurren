@@ -19,7 +19,6 @@ find_package(catkin REQUIRED COMPONENTS
   kdl_parser
   kdl_conversions
   cartesian_state_msgs
-  cartesian_velocity_controller
 )
 set(CMAKE_CXX_FLAGS "-O2 -O3 -std=c++11 -mtune=native -fPIC -Wall -Wno-deprecated-declarations")
 
@@ -106,7 +105,7 @@ set(CMAKE_CXX_FLAGS "-O2 -O3 -std=c++11 -mtune=native -fPIC -Wall -Wno-deprecate
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES cartesian_velocity_position_controller
-  DEPENDS cartesian_state_msgs cartesian_velocity_controller
+  DEPENDS cartesian_state_msgs
 )
 
 ###########
