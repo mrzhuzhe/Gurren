@@ -33,9 +33,10 @@ rosdep install -i --from-path src --rosdistro noetic --ignore-src -r -y
         
         /my_test/src/robots/universal_robot/fmauch_universal_robot/ur_gazebo/config/ur5e_controllers.yaml
     ```
-4. add robot state print in controller template [need KDL parser]
-5. implement a cartesian controller
-6. implement a force cartesian algorithem
+4. add robot state print in controller template [ok]
+5. implement a cartesian controller [ok] but this is depend on solver in KDL libary which is heavily out of date, 
+6. implement a force cartesian algorithem [trivil]
+7. implement KDL libary according to ur_cartesian and so on 
 
 ### about hardware interface 
 1. customer a robot hardware reffer to ur_cartesian

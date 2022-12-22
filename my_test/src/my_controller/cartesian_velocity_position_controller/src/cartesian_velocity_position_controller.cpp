@@ -153,23 +153,23 @@ namespace cartesian_velocity_position_controller {
 
         //  direction 
         KDL::Vector _vec = (End_Pos_Cmd_.p - End_Pos_.p);
-        //  reduce velocity under 1e-3
+        //  static velocity above 1e-3        
         if(_vec.Norm() > 1e-3)
         {
-            _vec = _vec / _vec.Norm();
-        }
+            _vec = 0.1 * _vec / _vec.Norm();
+        }        
         End_Vel_Cmd_.vel = _vec;
-        //End_Vel_Cmd_.vel = _vec;
         
         //  rotate
         //  [0.4,0.0,0.50,       0.707, -0.707, 0.0, 0.0]
         //  [0.5,0.0,0.50,       0.477, -0.480, 0.646, -0.353]
+        /*
         if(desired_pose_orientation_.coeffs().dot(arm_orientation_.coeffs()) < 0.0)
         {
             arm_orientation_.coeffs() << -arm_orientation_.coeffs();
         }
-        //Eigen::Quaterniond quat_rot_err (arm_orientation_ * desired_pose_orientation_.inverse());
-        Eigen::Quaterniond quat_rot_err = desired_pose_orientation_ * arm_orientation_.inverse();  // https://en.wikipedia.org/wiki/Invertible_matrix
+        //Eigen::Quaterniond quat_rot_err (arm_orientation_ * desired_pose_orientation_.inverse()); //  backward 
+        Eigen::Quaterniond quat_rot_err = desired_pose_orientation_ * arm_orientation_.inverse();  //   forward
         //  reduce velocity
         if(quat_rot_err.coeffs().norm() > 1e-3)
         {
@@ -177,12 +177,21 @@ namespace cartesian_velocity_position_controller {
         }
         Eigen::AngleAxisd err_arm_des_orient(quat_rot_err); 
         Eigen:Vector3d _vec3 =  err_arm_des_orient.axis();
-        //Eigen:Vector3d _vec3 = - err_arm_des_orient.axis() * err_arm_des_orient.angle();
+        //Eigen:Vector3d _vec3 = - err_arm_des_orient.axis() * err_arm_des_orient.angle(); // backward 
         
         End_Vel_Cmd_.rot(0) = _vec3(0);
         End_Vel_Cmd_.rot(1) = _vec3(1);
         End_Vel_Cmd_.rot(2) = _vec3(2);
-        
+        */
+
+        KDL::Rotation _rot = End_Pos_Cmd_.M * End_Pos_.M.Inverse();
+        KDL::Vector _theta = _rot.GetRot();
+        //  static velocity above 1e-3        
+        if(_theta.Norm() > 1e-3)
+        {
+            _theta = 0.1 * _theta / _theta.Norm(); // reduce speed or it will be too fast
+        }  
+        End_Vel_Cmd_.rot = _theta;
         
         //ROS_INFO_STREAM("LOOPRATE");
     }
