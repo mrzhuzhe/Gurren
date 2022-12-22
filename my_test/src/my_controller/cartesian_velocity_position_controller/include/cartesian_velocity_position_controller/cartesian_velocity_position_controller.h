@@ -85,8 +85,8 @@ namespace cartesian_velocity_position_controller {
 
             boost::shared_ptr<realtime_tools::RealtimePublisher<
                 cartesian_state_msgs::PoseTwist> > realtime_pub_;
-            Quaterniond desired_pose_orientation_;
-            Quaterniond arm_orientation_;
+            //  Quaterniond desired_pose_orientation_;
+            //  Quaterniond arm_orientation_;
 
     };
 }

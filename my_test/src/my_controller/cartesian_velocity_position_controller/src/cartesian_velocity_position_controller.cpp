@@ -135,16 +135,18 @@ namespace cartesian_velocity_position_controller {
             //  http://docs.ros.org/en/indigo/api/orocos_kdl/html/classKDL_1_1Frame.html
             //ROS_INFO("End_Pos_ %f %f %f", End_Pos_.p(0), End_Pos_.p(1), End_Pos_.p(2));
             
+            /*
             double _x = 0, _y = 0, _z = 0, _w = 0;
 
             End_Pos_.M.GetQuaternion(_x, _y, _z, _w);
 
 
+            
             arm_orientation_.coeffs() <<  _x,
                                     _y,
                                     _z,
                                     _w;
-
+            */
             //ROS_INFO("End_Pos_ %f %f %f %f", _x, _y, _z, _w);
             
             realtime_pub_->unlockAndPublish();
@@ -160,10 +162,12 @@ namespace cartesian_velocity_position_controller {
         }        
         End_Vel_Cmd_.vel = _vec;
         
+        /*      
+        // Eigen implement  
         //  rotate
         //  [0.4,0.0,0.50,       0.707, -0.707, 0.0, 0.0]
         //  [0.5,0.0,0.50,       0.477, -0.480, 0.646, -0.353]
-        /*
+        
         if(desired_pose_orientation_.coeffs().dot(arm_orientation_.coeffs()) < 0.0)
         {
             arm_orientation_.coeffs() << -arm_orientation_.coeffs();
@@ -184,6 +188,7 @@ namespace cartesian_velocity_position_controller {
         End_Vel_Cmd_.rot(2) = _vec3(2);
         */
 
+        // KDL implement
         KDL::Rotation _rot = End_Pos_Cmd_.M * End_Pos_.M.Inverse();
         KDL::Vector _theta = _rot.GetRot();
         //  static velocity above 1e-3        
@@ -228,12 +233,12 @@ namespace cartesian_velocity_position_controller {
         End_Pos_Cmd_.p = End_Pos_Vector;
         End_Pos_Cmd_.M = End_Pos_Rotation.Quaternion(x,y,z,w);
         
+        /*
         desired_pose_orientation_.coeffs() <<  x,
                                 y,
                                 z,
                                 w;
-
-        
+        */        
     }
 
     /********************************************/
