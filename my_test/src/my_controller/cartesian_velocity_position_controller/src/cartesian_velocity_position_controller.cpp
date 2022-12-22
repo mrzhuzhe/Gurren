@@ -153,7 +153,12 @@ namespace cartesian_velocity_position_controller {
 
         //  direction 
         KDL::Vector _vec = (End_Pos_Cmd_.p - End_Pos_.p);
-        End_Vel_Cmd_.vel = _vec / _vec.Norm();
+        //  reduce velocity under 1e-3
+        if(_vec.Norm() > 1e-3)
+        {
+            _vec = _vec / _vec.Norm();
+        }
+        End_Vel_Cmd_.vel = _vec;
         //End_Vel_Cmd_.vel = _vec;
         
         //  rotate
@@ -164,8 +169,8 @@ namespace cartesian_velocity_position_controller {
             arm_orientation_.coeffs() << -arm_orientation_.coeffs();
         }
         //Eigen::Quaterniond quat_rot_err (arm_orientation_ * desired_pose_orientation_.inverse());
-        Eigen::Quaterniond quat_rot_err = desired_pose_orientation_ * arm_orientation_.inverse();
-
+        Eigen::Quaterniond quat_rot_err = desired_pose_orientation_ * arm_orientation_.inverse();  // https://en.wikipedia.org/wiki/Invertible_matrix
+        //  reduce velocity
         if(quat_rot_err.coeffs().norm() > 1e-3)
         {
             quat_rot_err.coeffs() << quat_rot_err.coeffs()/quat_rot_err.coeffs().norm();
