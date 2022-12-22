@@ -37,6 +37,10 @@ rosdep install -i --from-path src --rosdistro noetic --ignore-src -r -y
 5. implement a cartesian controller [ok] but this is depend on solver in KDL libary which is heavily out of date, 
 6. implement a force cartesian algorithem [trivil]
 7. implement KDL libary according to ur_cartesian and so on 
+    Trak ik 
+    ur_cartesian
+    fastik
+    kdl
 
 ### about hardware interface 
 1. customer a robot hardware reffer to ur_cartesian
