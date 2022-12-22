@@ -62,6 +62,8 @@ namespace cartesian_velocity_position_controller {
         End_Vel_.p.Zero();
         End_Vel_.M.Identity();
 
+        //desired_pose_orientation_
+        //arm_orientation_ 
         return true;
     }
 
@@ -129,44 +131,49 @@ namespace cartesian_velocity_position_controller {
 
             //  http://docs.ros.org/en/indigo/api/orocos_kdl/html/classKDL_1_1Frame.html
             //ROS_INFO("End_Pos_ %f %f %f", End_Pos_.p(0), End_Pos_.p(1), End_Pos_.p(2));
+            
             double _x = 0, _y = 0, _z = 0, _w = 0;
 
             End_Pos_.M.GetQuaternion(_x, _y, _z, _w);
-            ROS_INFO("End_Pos_ %f %f %f %f", _x, _y, _z, _w);
 
+
+            arm_orientation_.coeffs() <<  _x,
+                                    _y,
+                                    _z,
+                                    _w;
+
+            //ROS_INFO("End_Pos_ %f %f %f %f", _x, _y, _z, _w);
+            
             realtime_pub_->unlockAndPublish();
             }
         }
-        
-        //for (int i; i< 3; i++){
-        //direction End_Vel_Cmd_.vel = (End_Pos_Cmd_.p - End_Pos_.p).normalize()
+
+        //  direction 
         KDL::Vector _vec = (End_Pos_Cmd_.p - End_Pos_.p);
-        End_Vel_Cmd_.vel = 1 * _vec / _vec.Norm();
-
-        // rotation  
-        //KDL::Rotation _rot = End_Pos_.M.Inverse() * End_Pos_Cmd_.M;
-        KDL::Rotation _rot = End_Pos_.M * End_Pos_Cmd_.M.Inverse();
-        //  Returns a vector with the direction of the equiv. axis and its norm is angle
-        KDL::Vector _rot_vec = _rot.GetRot();
-        _rot_vec = _rot_vec / _rot_vec.Norm();
+        End_Vel_Cmd_.vel = _vec / _vec.Norm();
+        //End_Vel_Cmd_.vel = _vec;
         
-        /*
-        //  https://stackoverflow.com/questions/35145790/how-do-to-determine-axis-angle-from-rotation-matrix-using-eigen-libary
-        Eigen::Vector3d axis;
-        axis(0) = _rot_vec(0);
-        axis(1) = _rot_vec(1);
-        axis(2) = _rot_vec(2);
-        Eigen::Matrix3d mat;
-        mat = Eigen::AngleAxisd(0.01, axis);
-        Eigen::AngleAxisd newAngleAxis(mat);
+        //  rotate
+        //  [0.4,0.0,0.50,       0.707, -0.707, 0.0, 0.0]
+        //  [0.5,0.0,0.50,       0.477, -0.480, 0.646, -0.353]
+        if(desired_pose_orientation_.coeffs().dot(arm_orientation_.coeffs()) < 0.0)
+        {
+            arm_orientation_.coeffs() << -arm_orientation_.coeffs();
+        }
+        Eigen::Quaterniond quat_rot_err (arm_orientation_ * desired_pose_orientation_.inverse());
+        if(quat_rot_err.coeffs().norm() > 1e-3)
+        {
+            quat_rot_err.coeffs() << quat_rot_err.coeffs()/quat_rot_err.coeffs().norm();
+        }
+        Eigen::AngleAxisd err_arm_des_orient(quat_rot_err); 
+        Eigen:Vector3d _vec3 = - err_arm_des_orient.axis();
+        //Eigen:Vector3d _vec3 = - err_arm_des_orient.axis() * err_arm_des_orient.angle();
         
-        //ROS_INFO("_rot: %f", [0]);
-        End_Vel_Cmd_.rot = newAngleAxis.axis();
-        */
-        End_Vel_Cmd_.rot = _rot_vec;
-
-
-        // 
+        End_Vel_Cmd_.rot(0) = _vec3(0);
+        End_Vel_Cmd_.rot(1) = _vec3(1);
+        End_Vel_Cmd_.rot(2) = _vec3(2);
+        
+        
         //ROS_INFO_STREAM("LOOPRATE");
     }
 
@@ -202,7 +209,12 @@ namespace cartesian_velocity_position_controller {
         End_Pos_Cmd_.p = End_Pos_Vector;
         End_Pos_Cmd_.M = End_Pos_Rotation.Quaternion(x,y,z,w);
         
-    
+        desired_pose_orientation_.coeffs() <<  x,
+                                y,
+                                z,
+                                w;
+
+        
     }
 
     /********************************************/

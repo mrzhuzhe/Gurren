@@ -40,8 +40,8 @@
   <!-- Controller configuration -->
   <arg name="controller_config_file" default="$(find ur_gazebo)/config/ur5e_controllers.yaml" doc="Config file used for defining the ROS-Control controllers."/>
   <arg name="controllers" default="cartesian_velocity_position_controller joint_state_controller" doc="Controllers that are activated by default."/>
-  <arg name="stopped_controllers" default="pos_joint_traj_controller joint_group_pos_controller test_controller cartesian_controller cartesian_velocity_controller" doc="Controllers that are initally loaded, but not started."/>
-
+  <!-- <arg name="stopped_controllers" default="pos_joint_traj_controller joint_group_pos_controller test_controller cartesian_controller cartesian_velocity_controller" doc="Controllers that are initally loaded, but not started."/> -->
+  <arg name="stopped_controllers" default="pos_joint_traj_controller joint_group_pos_controller" doc="Controllers that are initally loaded, but not started."/>
   <!-- robot_state_publisher configuration -->
   <arg name="tf_prefix" default="" doc="tf_prefix used for the robot."/>
   <arg name="tf_pub_rate" default="500" doc="Rate at which robot_state_publisher should publish transforms."/>
