@@ -62,8 +62,11 @@ namespace cartesian_velocity_position_controller {
         End_Vel_.p.Zero();
         End_Vel_.M.Identity();
 
-        //desired_pose_orientation_
-        //arm_orientation_ 
+        /* Todo initial pose
+            End_Pos_Cmd_ = 
+            desired_pose_orientation_ = 
+            arm_orientation_ 
+        */
         return true;
     }
 
