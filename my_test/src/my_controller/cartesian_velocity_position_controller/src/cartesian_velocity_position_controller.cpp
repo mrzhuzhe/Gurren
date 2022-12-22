@@ -137,16 +137,33 @@ namespace cartesian_velocity_position_controller {
             realtime_pub_->unlockAndPublish();
             }
         }
+        
+        //for (int i; i< 3; i++){
+        //direction End_Vel_Cmd_.vel = (End_Pos_Cmd_.p - End_Pos_.p).normalize()
+        KDL::Vector _vec = (End_Pos_Cmd_.p - End_Pos_.p);
+        End_Vel_Cmd_.vel = 1 * _vec / _vec.Norm();
 
-        for (int i; i< 3; i++){
-            //direction End_Vel_Cmd_.vel = (End_Pos_Cmd_.p - End_Pos_.p).normalize()
-            KDL::Vector _vec = (End_Pos_Cmd_.p - End_Pos_.p);
-            End_Vel_Cmd_.vel = 1 * _vec / _vec.Norm();
-
-            KDL::Rotation _rot = End_Pos_.M.Inverse() * End_Pos_Cmd_.M;
-            End_Vel_Cmd_.rot = _rot.GetRot();
-
-        }
+        // rotation  
+        //KDL::Rotation _rot = End_Pos_.M.Inverse() * End_Pos_Cmd_.M;
+        KDL::Rotation _rot = End_Pos_.M * End_Pos_Cmd_.M.Inverse();
+        //  Returns a vector with the direction of the equiv. axis and its norm is angle
+        KDL::Vector _rot_vec = _rot.GetRot();
+        _rot_vec = _rot_vec / _rot_vec.Norm();
+        
+        /*
+        //  https://stackoverflow.com/questions/35145790/how-do-to-determine-axis-angle-from-rotation-matrix-using-eigen-libary
+        Eigen::Vector3d axis;
+        axis(0) = _rot_vec(0);
+        axis(1) = _rot_vec(1);
+        axis(2) = _rot_vec(2);
+        Eigen::Matrix3d mat;
+        mat = Eigen::AngleAxisd(0.01, axis);
+        Eigen::AngleAxisd newAngleAxis(mat);
+        
+        //ROS_INFO("_rot: %f", [0]);
+        End_Vel_Cmd_.rot = newAngleAxis.axis();
+        */
+        End_Vel_Cmd_.rot = _rot_vec;
 
 
         // 
