@@ -163,13 +163,15 @@ namespace cartesian_velocity_position_controller {
         {
             arm_orientation_.coeffs() << -arm_orientation_.coeffs();
         }
-        Eigen::Quaterniond quat_rot_err (arm_orientation_ * desired_pose_orientation_.inverse());
+        //Eigen::Quaterniond quat_rot_err (arm_orientation_ * desired_pose_orientation_.inverse());
+        Eigen::Quaterniond quat_rot_err = desired_pose_orientation_ * arm_orientation_.inverse();
+
         if(quat_rot_err.coeffs().norm() > 1e-3)
         {
             quat_rot_err.coeffs() << quat_rot_err.coeffs()/quat_rot_err.coeffs().norm();
         }
         Eigen::AngleAxisd err_arm_des_orient(quat_rot_err); 
-        Eigen:Vector3d _vec3 = - err_arm_des_orient.axis();
+        Eigen:Vector3d _vec3 =  err_arm_des_orient.axis();
         //Eigen:Vector3d _vec3 = - err_arm_des_orient.axis() * err_arm_des_orient.angle();
         
         End_Vel_Cmd_.rot(0) = _vec3(0);
