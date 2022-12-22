@@ -194,7 +194,7 @@ namespace cartesian_velocity_position_controller {
         //  static velocity above 1e-3        
         if(_theta.Norm() > 1e-3)
         {
-            _theta = 0.1 * _theta / _theta.Norm(); // reduce speed or it will be too fast
+            _theta = 0.3 * _theta / _theta.Norm(); // reduce speed or it will be too fast
         }  
         End_Vel_Cmd_.rot = _theta;
         
