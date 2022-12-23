@@ -2,14 +2,91 @@
 
 > 红莲！ simulate and control ur5
 
+
+<br>
+
+
+# 1. Customize ROS_Controller
+
+<br>
+
+Customize ros contoller to implement cartesian velocity control
+
+[Detail](./Docs/CustomizeRosController.md) 
+
+<br>
+
+## Run
+
+```
+cd my_test/
+
+roslaunch ur_gazebo ur5e_bringup.launch controller：=cartesian_velocity_position_controller
+roslaunch ur_gazebo ur5e_bringup.launch controller：=cartesian_velocity_controller
+roslaunch ur_gazebo ur5e_bringup.launch controller：=cartesian_controller
+roslaunch ur_gazebo ur5e_bringup.launch controller：=test_controller
+
+
+```
+
+<br>
+
+------------------
+
+<br>
+<br>
+
+## Install 
+
+```
+cd my_test/
+
+catkin build
+
+// install controller plugins 
+// If you add a controller plugin you need run this once more time
+rosdep install -i --from-path src --rosdistro noetic --ignore-src -r -y
+
+source devel/setup.bash
+```
+
+<br>
+
+------------------
+
+<br>
+<br>
+
+
+
+
+
+# 2. MOVEIT GAZEBO setup demo
+
+<br>
+
+Setup ROS gazebo enviroment and moveit to move robot follow a trajectory base on 3d model convexhull 
+
+[Detail](Docs/MoveItGazeboDemo.md)
+
+<br>
+
+> Video: <a href="https://www.bilibili.com/video/BV1KY4y1F73s/?spm_id_from=333.999.0.0">【Sim2real】01：ROS ， Moveit ， Gazebo 和凸包 </a>
+
+> Post:  <a href="https://starofus.xyz/post/Sim2real_foundation">【Sim2real】01：ROS ， Moveit ， Gazebo 和凸包 </a>
+
+### Dependence 
+
  1. ROS Noetic
  2. UR robot driver  Version 2022/08
  3. moveit Moveit 1 Noetic
  4. gazebo Version 11
 
-## Run
+### Run
 
 ```
+cd catkin_ws/
+
 // connect robot
 roslaunch ur_robot_driver ur5_bringup.launch robot_ip:=192.168.130.105
 [gazebo] roslaunch zz_test ur5_gazebo_test.launch
@@ -34,11 +111,11 @@ roslaunch zz_test move_group_interface_tutorial.launch
 <br>
 <br>
 
-## Install 
+### Install 
 
 
 ```
-# install ROS Noetic first
+# Install ROS Noetic first
 
 # then install rosdep
 sudo apt-get install python3-rosdep
@@ -71,178 +148,11 @@ $ source devel/setup.bash
 <br>
 
 
-## Applications
+### Applications
 
 Robot applications features will be develop in other reposs
 
 1. calculate way point from CAD https://github.com/mrzhuzhe/Patrick/tree/main/geo/contour
-
-<br>
-
-------------------
-
-<br>
-<br>
-
-## Setup 
-
-```
-source devel/setup.bash
-```
-> https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/blob/master/README.md#extract-calibration-information
-
-
-<br>
-
-------------------
-
-<br>
-<br>
-
-## simulator setup 
-
-use vitual machine on linux 
-
-> https://www.universal-robots.com/download/software-cb-series/simulator-linux/offline-simulator-cb3-linux-ursim-3157/
-
-
-
-```
-# connect to Robot
-
-roslaunch ur_robot_driver ur5e_bringup.launch robot_ip:=192.168.56.101
-
-# Rviz
-
-roslaunch ur_robot_driver example_rviz.launch
-
-
-```
-
-> https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/blob/master/ur_robot_driver/doc/usage_example.md
-
-<br>
-
-------------------
-
-<br>
-<br>
-
-
-
-## Moveit 
-
-> https://ros-planning.github.io/moveit_tutorials/doc/getting_started/getting_started.html
-
-
-Install 
-
-```
-
-# we shall add so many huge package 
-
-warning: adding embedded git repository: ws_moveit/src/geometric_shapes
-hint: You've added another git repository inside your current repository.
-hint: Clones of the outer repository will not contain the contents of
-hint: the embedded repository and will not know how to obtain it.
-hint: If you meant to add a submodule, use:
-hint: 
-hint:   git submodule add <url> ws_moveit/src/geometric_shapes
-hint: 
-hint: If you added this path by mistake, you can remove it from the
-hint: index with:
-hint: 
-hint:   git rm --cached ws_moveit/src/geometric_shapes
-hint: 
-hint: See "git help submodule" for more information.
-warning: adding embedded git repository: ws_moveit/src/moveit
-warning: adding embedded git repository: ws_moveit/src/moveit_msgs
-warning: adding embedded git repository: ws_moveit/src/moveit_resources
-warning: adding embedded git repository: ws_moveit/src/moveit_visual_tools
-warning: adding embedded git repository: ws_moveit/src/rviz_visual_tools
-warning: adding embedded git repository: ws_moveit/src/srdfdom
-
-
-# so clone it as submodules instead
-git submodule add https://github.com/ros-planning/geometric_shapes.git ws_moveit/src/geometric_shapes
-git submodule add https://github.com/ros-planning/moveit.git ws_moveit/src/moveit
-git submodule add https://github.com/ros-planning/moveit_msgs.git ws_moveit/src/moveit_msgs
-git submodule add https://github.com/ros-planning/moveit_resources.git ws_moveit/src/moveit_resources
-git submodule add https://github.com/ros-planning/moveit_visual_tools.git ws_moveit/src/moveit_visual_tools
-git submodule add https://github.com/PickNikRobotics/rviz_visual_tools.git ws_moveit/src/rviz_visual_tools
-git submodule add https://github.com/ros-planning/srdfdom.git ws_moveit/src/srdfdom
-
-```
-
-setup workspace
-
-```
-source ws_moveit/devel/setup.bash
-
-#   echo 'source /mnt/e28833eb-0c99-4fe2-802a-09fa58d9c9f5/code/Gurren/ws_moveit/devel/setup.bash' >> ~/.bashrc
-```
-
-
-1. planning https://ros-planning.github.io/moveit_tutorials/doc/move_group_python_interface/move_group_python_interface_tutorial.html
-
-2. use orientation
-https://stackoverflow.com/questions/60840019/practical-understanding-of-quaternions-in-ros-moveit
-
-```
-quaternion = quaternion_from_euler(60, 0, 30)
-
-pose_goal.orientation.x = quaternion[0]
-pose_goal.orientation.y = quaternion[1]
-pose_goal.orientation.z = quaternion[2]
-pose_goal.orientation.w = quaternion[3]
-
-move_group.set_pose_target(pose_goal)
-```
-<br>
-
-------------------
-
-<br>
-<br>
-
-## gazebo
-
-docs:
-https://classic.gazebosim.org/tutorials?tut=components&cat=get_started
-
-physics setting: 
-https://classic.gazebosim.org/tutorials?cat=physics
-there are some setting wrong in inertial friction and so on
-
-<br>
-
-------------------
-
-<br>
-<br>
-
-## ROS sensor 
-
-1. http://wiki.ros.org/Sensors drivers and so on
-2. http://wiki.ros.org/Sensors/Cameras 
-3. https://classic.gazebosim.org/tutorials?tut=ros_gzplugins&cat=connect_ros 
-4. /rrbot/camera1/image_raw
-5. gazebo cannot be definte in world only used in URDF
-
-<br>
-
-------------------
-
-<br>
-<br>
-
-## references
-
-1. https://github.com/fmauch/universal_robot
-2. https://github.com/cambel/ur3/
-3. https://github.com/lihuang3/ur5_ROS-Gazebo
-4. https://github.com/MingshanHe/Compliant-Control-and-Application
-5.  World Robot Summit 
 
 <br>
 

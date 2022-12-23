@@ -1,29 +1,36 @@
-# My controller test
+# Customize ROS_Controller
+
+Customize ros contoller to implement cartesian velocity control
 
 ## Run
 
 ```
+cd my_test/
 
-roslaunch ur_gazebo ur5_bringup.launch 
+roslaunch ur_gazebo ur5e_bringup.launch controller：=cartesian_velocity_position_controller
+roslaunch ur_gazebo ur5e_bringup.launch controller：=cartesian_velocity_controller
+roslaunch ur_gazebo ur5e_bringup.launch controller：=cartesian_controller
+roslaunch ur_gazebo ur5e_bringup.launch controller：=test_controller
 
-roslaunch ur_gazebo ur5e_bringup.launch 
 
 ```
 
-## Install
+## Install 
 
 ```
+cd my_test/
 
 catkin build
 
-// install controller plugins
+// install controller plugins 
+// If you add a controller plugin you need run this once more time
 rosdep install -i --from-path src --rosdistro noetic --ignore-src -r -y
 
+source devel/setup.bash
 ```
-
 ## RoadMap
 
-### about custom controller 
+### About custom controller 
 
 1. setup ur5 and ur5e driver [ok]
 2. create a controller template [ok]
@@ -42,9 +49,9 @@ rosdep install -i --from-path src --rosdistro noetic --ignore-src -r -y
     fastik
     kdl
 
-### about hardware interface 
-1. customer a robot hardware reffer to ur_cartesian
+### About hardware interface 
 
+1. customer a robot hardware reffer to ur_cartesian
 
 
 ## References
@@ -63,3 +70,4 @@ rosdep install -i --from-path src --rosdistro noetic --ignore-src -r -y
 
     sudo apt-get install ros-noetic-rqt-controller-manager
 6. http://wiki.ros.org/kdl KDL
+
