@@ -1,6 +1,0 @@
-<launch>
-
-  <node name="zz_move_group_interface_tutorial_backup" pkg="zz_beginner_tutorials" type="zz_move_group_interface_tutorial_backup" respawn="false" output="screen">
-  </node>
-
-</launch>

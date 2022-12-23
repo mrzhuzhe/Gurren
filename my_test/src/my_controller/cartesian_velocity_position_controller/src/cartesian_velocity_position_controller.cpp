@@ -5,10 +5,6 @@
 #include "cartesian_velocity_position_controller/kdl_base.h"
 
 namespace cartesian_velocity_position_controller {
-    void Cartesian_Velocity_Position_Controller::testfun(){
-
-    }
-
     /** \brief Initialize the kinematic chain for kinematics-based computation.
     *
     */

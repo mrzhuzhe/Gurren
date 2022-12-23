@@ -22,8 +22,7 @@ namespace cartesian_velocity_position_controller {
         public:
             Cartesian_Velocity_Position_Controller() {}
             ~Cartesian_Velocity_Position_Controller() {}
-            void testfun(void);
-            
+                    
             /** \brief The init function is called to initialize the controller from a
             * non-realtime thread with a pointer to the hardware interface, itself,
             * instead of a pointer to a RobotHW.
