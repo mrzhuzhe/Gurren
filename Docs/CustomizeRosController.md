@@ -7,11 +7,21 @@ Customize ros contoller to implement cartesian velocity control
 ```
 cd my_test/
 
-roslaunch ur_gazebo ur5e_bringup.launch controller：=cartesian_velocity_position_controller
-roslaunch ur_gazebo ur5e_bringup.launch controller：=cartesian_velocity_controller
-roslaunch ur_gazebo ur5e_bringup.launch controller：=cartesian_controller
-roslaunch ur_gazebo ur5e_bringup.launch controller：=test_controller
+source devel/setup.bash
 
+// run to a position with static cartesian velocity  
+roslaunch ur_gazebo ur5e_bringup.launch controllers:=cartesian_velocity_position_controller
+
+// caertesian velocity controller 
+roslaunch ur_gazebo ur5e_bringup.launch controllers:=cartesian_velocity_controller
+
+// cartesian position 
+roslaunch ur_gazebo ur5e_bringup.launch controllers:=cartesian_controller
+
+// only test control hook
+roslaunch ur_gazebo ur5e_bringup.launch controllers:=test_controller
+
+// run it with rqt topic publisher 
 
 ```
 
