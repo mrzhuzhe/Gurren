@@ -14,6 +14,8 @@ Customize ros contoller to implement cartesian velocity control
 
 [Detail](./Docs/CustomizeRosController.md) 
 
+------------------
+
 <br>
 
 ## Run
@@ -28,12 +30,8 @@ roslaunch ur_gazebo ur5e_bringup.launch controller：=test_controller
 
 
 ```
-
-<br>
-
 ------------------
 
-<br>
 <br>
 
 ## Install 
@@ -55,7 +53,6 @@ source devel/setup.bash
 ------------------
 
 <br>
-<br>
 
 
 
@@ -75,12 +72,20 @@ Setup ROS gazebo enviroment and moveit to move robot follow a trajectory base on
 
 > Post:  <a href="https://starofus.xyz/post/Sim2real_foundation">【Sim2real】01：ROS ， Moveit ， Gazebo 和凸包 </a>
 
+------------------
+
+<br>
+
 ### Dependence 
 
  1. ROS Noetic
  2. UR robot driver  Version 2022/08
  3. moveit Moveit 1 Noetic
  4. gazebo Version 11
+
+------------------
+
+<br>
 
 ### Run
 
@@ -104,11 +109,9 @@ roslaunch zz_test moveit_rviz.launch
 roslaunch zz_test move_group_interface_tutorial.launch 
 
 ```
-<br>
 
 ------------------
 
-<br>
 <br>
 
 ### Install 
@@ -140,11 +143,9 @@ $ source devel/setup.bash
 
 
 ```
-<br>
 
 ------------------
 
-<br>
 <br>
 
 
@@ -154,9 +155,6 @@ Robot applications features will be develop in other reposs
 
 1. calculate way point from CAD https://github.com/mrzhuzhe/Patrick/tree/main/geo/contour
 
-<br>
-
 ------------------
 
-<br>
 <br>
