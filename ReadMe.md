@@ -5,8 +5,44 @@
 
 <br>
 
+## Clone
 
-# 1. Customize ROS_Controller
+Notice: this repo has submodule clone it with --recursive
+
+```
+# Clone all submodules
+git clone --recursive git@github.com:mrzhuzhe/Gurren.git
+```
+
+------------------
+
+<br>
+
+## Dependences
+
+Notice: you shall install python3-rosdep
+```
+# Install ROS Noetic first
+
+# then install rosdep
+sudo apt-get install python3-rosdep
+sudo rosdep init
+rosdep update
+
+# this is ad hoc a bug rqt didn't auto install controller manager
+sudo apt-get install ros-noetic-rqt-controller-manager
+```
+
+ 1. ROS Noetic
+ 2. UR robot driver  Version 2022/08
+ 3. moveit Moveit 1 Noetic
+ 4. gazebo Version 11
+
+------------------
+
+<br>
+
+## 1. Customize ROS_Controller
 
 <br>
 
@@ -18,7 +54,7 @@ Customize ros contoller to implement cartesian velocity control
 
 <br>
 
-## Run
+### Run
 
 ```
 cd my_test/
@@ -43,7 +79,7 @@ roslaunch ur_gazebo ur5e_bringup.launch controllers:=test_controller
 
 <br>
 
-## Install 
+### Install 
 
 ```
 cd my_test/
@@ -67,7 +103,7 @@ source devel/setup.bash
 
 
 
-# 2. MOVEIT GAZEBO setup demo
+## 2. MOVEIT GAZEBO setup demo
 
 <br>
 
@@ -85,16 +121,6 @@ Setup ROS gazebo enviroment and moveit to move robot follow a trajectory base on
 
 <br>
 
-### Dependence 
-
- 1. ROS Noetic
- 2. UR robot driver  Version 2022/08
- 3. moveit Moveit 1 Noetic
- 4. gazebo Version 11
-
-------------------
-
-<br>
 
 ### Run
 
@@ -127,16 +153,6 @@ roslaunch zz_test move_group_interface_tutorial.launch
 
 
 ```
-# Install ROS Noetic first
-
-# then install rosdep
-sudo apt-get install python3-rosdep
-sudo rosdep init
-rosdep update
-
-
-# then clone all submodules
-git clone --recursive git@github.com:mrzhuzhe/Gurren.git
 
 # install dependencies
 $ sudo apt update -qq
@@ -158,12 +174,3 @@ $ source devel/setup.bash
 <br>
 
 
-### Applications
-
-Robot applications features will be develop in other reposs
-
-1. calculate way point from CAD https://github.com/mrzhuzhe/Patrick/tree/main/geo/contour
-
-------------------
-
-<br>
