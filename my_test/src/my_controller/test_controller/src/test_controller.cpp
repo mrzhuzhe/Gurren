@@ -4,6 +4,9 @@
 #include <hardware_interface/hardware_interface.h>
 #include <pluginlib/class_list_macros.h>
 #include <ros/ros.h>
+#include <string>
+
+using namespace std;
 
 namespace test_controller {
     /** \brief Initialize the kinematic chain for kinematics-based computation.
@@ -21,6 +24,12 @@ namespace test_controller {
         } else {
             ROS_INFO_STREAM("test_value: " << test_value);
         }
+            
+        for (int i = 0; i< _joint_len_; i++){
+            joint_handles_.push_back(robot->getHandle(_links[i]));
+        }
+        
+
         return true;
     }
 
@@ -39,9 +48,11 @@ namespace test_controller {
     * \brief Issues commands to the joint. Should be called at regular intervals
     */
     void Test_Controller::update(const ros::Time& time, const ros::Duration& period) {
-        
-        
-        ROS_INFO_STREAM("LOOPRATE");
+        string _str = "";
+        for (int i = 0; i < _joint_len_; i ++) {
+            _str += " " + to_string(this->joint_handles_[i].getPosition());
+        }
+        ROS_INFO_STREAM("Joint positions" << _str);
     }
 
     /********************************************/

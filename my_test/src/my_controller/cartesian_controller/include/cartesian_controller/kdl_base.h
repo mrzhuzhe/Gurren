@@ -184,6 +184,7 @@ namespace kdl_base
         ROS_INFO("%s type: %s", it->getJoint().getName().c_str(),
                 it->getJoint().getTypeName().c_str() );
         if(it->getJoint().getTypeName() != "None" && count < 7) {
+            //ROS_INFO_STREAM("----- joint Name" << it->getJoint().getName());
             joint_handles_.push_back(robot->getHandle(it->getJoint().getName()));
         }
         count++;

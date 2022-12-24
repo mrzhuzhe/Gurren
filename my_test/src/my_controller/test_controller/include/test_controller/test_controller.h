@@ -44,14 +44,16 @@ namespace test_controller {
             */
             void writeVelocityCommands(const ros::Duration& period);
             void writePositionCommands(const ros::Duration& period);
-                    
+
         protected:
-            /*
-            KDL::JntArray                   Jnt_Vel_Cmd_;      // Desired joint velocity
-            KDL::Twist                      End_Vel_Cmd_;      // Desired end-effector velocity
-            KDL::JntArray                   Jnt_Pos_Cmd_;      // Desired joint position
-            KDL::Frame                      End_Pos_Cmd_;      // Desired end-effector position
-            */
+            std::vector<hardware_interface::JointHandle> joint_handles_;
+            int _joint_len_ = 6;
+            std::string _links[6] = { "shoulder_pan_joint",
+                    "shoulder_lift_joint",
+                    "elbow_joint",
+                    "wrist_1_joint",
+                    "wrist_2_joint",
+                    "wrist_3_joint" };
 
     };
 }
