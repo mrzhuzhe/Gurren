@@ -50,6 +50,11 @@ Customize ros contoller to implement cartesian velocity control
 
 [Detail](./Docs/CustomizeRosController.md) 
 
+
+> Video: <a href="https://www.bilibili.com/video/BV1Ze411c7Zd/?spm_id_from=333.999.0.0">【Sim2real】02 自定义ROS_control实现反馈控制 </a>
+
+> Post:  <a href="https://starofus.xyz/post/ros_controller"> 【Sim2real】02 自定义ROS_control实现反馈控制 </a>
+
 ------------------
 
 <br>
